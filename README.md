@@ -1,4 +1,4 @@
-# MifSoft-Karma
+# Care
 
 <b>Vision:</b></br>
 A unified charity system application.
