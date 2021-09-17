@@ -1,10 +1,11 @@
 # MifSoft-Karma
+
+<b>Vision:</b></br>
 A unified charity system application.
 This app provides a way to donate unused items to people in need.
 It also allows people to donate to a charity of their choice.
 
-Features:
-
+<b>Features:</b></br>
 User Profile - every user is able to create a profile. They can upload a profile picture, their location and a description. Every other user can see how much items you have donated.
 
 Inventory - every user is able to upload items to their inventory, which other users are able to see.
