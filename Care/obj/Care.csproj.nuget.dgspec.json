@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\nenar\\source\\repos\\edvinaskrupo\\MifSoft-Karma\\Care\\Care.csproj": {}
+    "C:\\Users\\nenar\\source\\repos\\MifSoft-Karma\\Care\\Care.csproj": {}
   },
   "projects": {
-    "C:\\Users\\nenar\\source\\repos\\edvinaskrupo\\MifSoft-Karma\\Care\\Care.csproj": {
+    "C:\\Users\\nenar\\source\\repos\\MifSoft-Karma\\Care\\Care.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\nenar\\source\\repos\\edvinaskrupo\\MifSoft-Karma\\Care\\Care.csproj",
+        "projectUniqueName": "C:\\Users\\nenar\\source\\repos\\MifSoft-Karma\\Care\\Care.csproj",
         "projectName": "Care",
-        "projectPath": "C:\\Users\\nenar\\source\\repos\\edvinaskrupo\\MifSoft-Karma\\Care\\Care.csproj",
+        "projectPath": "C:\\Users\\nenar\\source\\repos\\MifSoft-Karma\\Care\\Care.csproj",
         "packagesPath": "C:\\Users\\nenar\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\nenar\\source\\repos\\edvinaskrupo\\MifSoft-Karma\\Care\\obj\\",
+        "outputPath": "C:\\Users\\nenar\\source\\repos\\MifSoft-Karma\\Care\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft\\Xamarin\\NuGet\\"
