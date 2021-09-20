@@ -78,3 +78,9 @@ C:\Users\nenar\Source\Repos\MifSoft-Karma\Care\obj\Debug\net5.0\ref\Care.dll
 C:\Users\nenar\Source\Repos\MifSoft-Karma\Care\obj\Debug\net5.0\Care.pdb
 C:\Users\nenar\Source\Repos\MifSoft-Karma\Care\obj\Debug\net5.0\Care.genruntimeconfig.cache
 C:\Users\nenar\Source\Repos\MifSoft-Karma\Care\obj\Debug\net5.0\Care.csproj.CopyComplete
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\obj\Debug\net5.0\Razor\Views\Shared\_Login.cshtml.g.cs
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.dll
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\bin\Debug\net5.0\Microsoft.EntityFrameworkCore.Abstractions.dll
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\bin\Debug\net5.0\Microsoft.Extensions.DependencyInjection.dll
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\bin\Debug\net5.0\System.Diagnostics.DiagnosticSource.dll
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\obj\Debug\net5.0\Razor\Views\Auth\Index.cshtml.g.cs
