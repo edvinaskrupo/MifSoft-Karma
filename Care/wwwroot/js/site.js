@@ -2,7 +2,7 @@
 
 $("#loginBtn").click(function () {
 
-    var url = "/Auth/Login";
+    var url = "/Auth/LogIn";
     $.ajax({
         url: url,
         cache: false,
@@ -18,7 +18,7 @@ $("#loginBtn").click(function () {
 
 $("#registrationBtn").click(function () {
 
-    var url = "/Auth/Registration";
+    var url = "/Auth/SignUp";
     $.ajax({
         url: url,
         cache: false,
