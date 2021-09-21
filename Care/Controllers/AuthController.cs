@@ -18,5 +18,10 @@ namespace Care.Controllers
             return PartialView("/Views/Shared/_Login.cshtml");
         }
 
+        public IActionResult Registration()
+        {
+            return PartialView("/Views/Shared/_Registration.cshtml");
+        }
+
     }
 }

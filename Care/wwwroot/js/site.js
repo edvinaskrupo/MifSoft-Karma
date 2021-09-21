@@ -16,3 +16,19 @@ $("#loginBtn").click(function () {
     });
 });
 
+$("#registrationBtn").click(function () {
+
+    var url = "/Auth/Registration";
+    $.ajax({
+        url: url,
+        cache: false,
+        type: "GET",
+        success: function (data) {
+            $(data).modal('show');
+        },
+        error: function (reponse) {
+            alert("error : " + reponse);
+        }
+    });
+});
+
