@@ -2,7 +2,7 @@
 
 namespace Care.Migrations
 {
-    public partial class UserModel : Migration
+    public partial class InitialCreate : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)
         {

@@ -9,8 +9,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Care.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    [Migration("20210921125857_UserModel")]
-    partial class UserModel
+    [Migration("20210921162048_InitialCreate")]
+    partial class InitialCreate
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
