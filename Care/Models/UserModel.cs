@@ -16,7 +16,9 @@ namespace Care.Models
         [DisplayName("Email address")]
         public string EmailAddress { get; set; }
         [Required]
-        public string Password { get; set; }
+        public string PasswordHash { get; set; }
+        [Required]
+        public string PasswordSalt { get; set; }
 
     }
 }
