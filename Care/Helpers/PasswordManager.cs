@@ -10,38 +10,37 @@ namespace Care.Helpers
 {
     public class PasswordManager
     {
-        public static Tuple<string, string> CreateHashedPassword(string password)
+        private const int SALT_SIZE = 32;
+      
+        public static string HashPassword(string password, string salt)
         {
-            var salt = CreateSalt();
+            SHA256 sha = SHA256.Create();
+            var saltedPassword = string.Format("{0}{1}", salt, password);
+             byte[] bytes = sha.ComputeHash(Encoding.ASCII.GetBytes(saltedPassword));
 
-            var hash = HashPassword(password, salt);
+             var hashed = new StringBuilder();
+             foreach (var b in bytes)
+             {
+                 hashed.Append(b.ToString("x2"));
+             }
 
-            return Tuple.Create(Convert.ToBase64String(salt), Convert.ToBase64String(hash));
-        }
-        private static byte[] HashPassword(string password, byte[] salt)
-        {
-            var argon2 = new Argon2id(Encoding.UTF8.GetBytes(password));
-
-            argon2.Salt = salt;
-            argon2.DegreeOfParallelism = 8;
-            argon2.Iterations = 4;
-            argon2.MemorySize = 1024 * 1024;
-
-            return argon2.GetBytes(16);
+             return hashed.ToString();
         }
 
-        private static bool VerifyHashedPassword(string password, byte[] salt, byte[] hash)
+        public static bool VerifyHashedPassword(string password, string hash, string salt)
         {
-            var newHash = HashPassword(password, salt);
-            return hash.SequenceEqual(newHash);
+            
+             var hashOfPassword = HashPassword(password, salt);
+             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
+             return comparer.Compare(hashOfPassword, hash) == 0;
         }
 
-        private static byte[] CreateSalt()
+        public static string CreateSalt()
         {
-            var buffer = new byte[16];
-            var rng = new RNGCryptoServiceProvider();
-            rng.GetBytes(buffer);
-            return buffer;
+            RNGCryptoServiceProvider rng = new RNGCryptoServiceProvider();
+            byte[] buff = new byte[SALT_SIZE];
+            rng.GetBytes(buff);
+            return Convert.ToBase64String(buff);
         }
     }
 }

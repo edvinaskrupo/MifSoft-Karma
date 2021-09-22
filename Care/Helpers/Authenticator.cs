@@ -15,7 +15,13 @@ namespace Care.Helpers
             bool authorized = ValidateEmail(user.EmailAddress) && ValidatePassword(user.Password);
             return authorized;
         }
-        
+
+        public bool AuthenticateLogin(string pass, string hash, string salt)
+        {
+            bool authorizedLogin = PasswordManager.VerifyHashedPassword(pass, hash, salt);
+            return authorizedLogin;
+        }
+
         private bool ValidateEmail(string emailAddress)
         {
             try

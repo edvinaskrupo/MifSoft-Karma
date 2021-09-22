@@ -79,6 +79,18 @@
           "lib/netstandard1.3/Konscious.Security.Cryptography.Blake2.dll": {}
         }
       },
+      "Microsoft.AspNet.Providers.Core/2.0.0": {
+        "type": "package",
+        "dependencies": {
+          "EntityFramework": "6.0.0"
+        },
+        "compile": {
+          "lib/net40/System.Web.Providers.dll": {}
+        },
+        "runtime": {
+          "lib/net40/System.Web.Providers.dll": {}
+        }
+      },
       "Microsoft.AspNet.Web.Optimization/1.1.3": {
         "type": "package",
         "dependencies": {
@@ -2974,6 +2986,20 @@
         "lib/net46/Konscious.Security.Cryptography.Blake2.xml",
         "lib/netstandard1.3/Konscious.Security.Cryptography.Blake2.dll",
         "lib/netstandard1.3/Konscious.Security.Cryptography.Blake2.xml"
+      ]
+    },
+    "Microsoft.AspNet.Providers.Core/2.0.0": {
+      "sha512": "JMk31PExMANVDc04aSUyIlcL3pkFVyNg/dDn+ZZzmhZ2CBctI90BWQH1L0zXgD61ZWW5r4ybInV362sRKWIC+A==",
+      "type": "package",
+      "path": "microsoft.aspnet.providers.core/2.0.0",
+      "files": [
+        ".nupkg.metadata",
+        ".signature.p7s",
+        "ReadMe.txt",
+        "lib/net40/System.Web.Providers.dll",
+        "lib/net40/System.Web.Providers.xml",
+        "microsoft.aspnet.providers.core.2.0.0.nupkg.sha512",
+        "microsoft.aspnet.providers.core.nuspec"
       ]
     },
     "Microsoft.AspNet.Web.Optimization/1.1.3": {
@@ -9372,6 +9398,7 @@
     "net5.0": [
       "EntityFramework >= 6.4.4",
       "Konscious.Security.Cryptography.Argon2 >= 1.2.1",
+      "Microsoft.AspNet.Providers.Core >= 2.0.0",
       "Microsoft.AspNet.Web.Optimization >= 1.1.3",
       "Microsoft.EntityFrameworkCore >= 5.0.10",
       "Microsoft.EntityFrameworkCore.Design >= 5.0.10",
@@ -9432,6 +9459,10 @@
           "Konscious.Security.Cryptography.Argon2": {
             "target": "Package",
             "version": "[1.2.1, )"
+          },
+          "Microsoft.AspNet.Providers.Core": {
+            "target": "Package",
+            "version": "[2.0.0, )"
           },
           "Microsoft.AspNet.Web.Optimization": {
             "target": "Package",
@@ -9495,6 +9526,16 @@
       "warningLevel": 1,
       "message": "Package 'Antlr 3.4.1.9004' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
       "libraryId": "Antlr",
+      "targetGraphs": [
+        "net5.0"
+      ]
+    },
+    {
+      "code": "NU1701",
+      "level": "Warning",
+      "warningLevel": 1,
+      "message": "Package 'Microsoft.AspNet.Providers.Core 2.0.0' was restored using '.NETFramework,Version=v4.6.1, .NETFramework,Version=v4.6.2, .NETFramework,Version=v4.7, .NETFramework,Version=v4.7.1, .NETFramework,Version=v4.7.2, .NETFramework,Version=v4.8' instead of the project target framework 'net5.0'. This package may not be fully compatible with your project.",
+      "libraryId": "Microsoft.AspNet.Providers.Core",
       "targetGraphs": [
         "net5.0"
       ]

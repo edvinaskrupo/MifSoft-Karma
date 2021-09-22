@@ -201,3 +201,4 @@ C:\Users\nenar\source\repos\MifSoft-Karma\Care\obj\Debug\net5.0\Care.dll
 C:\Users\nenar\source\repos\MifSoft-Karma\Care\obj\Debug\net5.0\ref\Care.dll
 C:\Users\nenar\source\repos\MifSoft-Karma\Care\obj\Debug\net5.0\Care.pdb
 C:\Users\nenar\source\repos\MifSoft-Karma\Care\obj\Debug\net5.0\Care.genruntimeconfig.cache
+C:\Users\nenar\source\repos\MifSoft-Karma\Care\bin\Debug\net5.0\System.Web.Providers.dll
