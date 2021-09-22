@@ -13,10 +13,8 @@ namespace Care.Helpers
         public static Tuple<string, string> CreateHashedPassword(string password)
         {
             var salt = CreateSalt();
-            Console.WriteLine($"Using salt '{ Convert.ToBase64String(salt) }'.");
 
             var hash = HashPassword(password, salt);
-            Console.WriteLine($"Hash is '{ Convert.ToBase64String(hash) }'.");
 
             return Tuple.Create(Convert.ToBase64String(salt), Convert.ToBase64String(hash));
         }
