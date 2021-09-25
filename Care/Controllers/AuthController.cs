@@ -65,7 +65,7 @@ namespace Care.Controllers
                 if (authenticator.AuthenticateLogin(user.Password, storedUser.PasswordHash, storedUser.PasswordSalt))
                 {
                         HttpContext.Session.SetString("User", storedUser.EmailAddress);
-                        return View("~/Views/Home/Index.cshml", storedUser);
+                        return View("~/Views/Home/Index.cshtml", storedUser);
                 }
                 ModelState.AddModelError("Password", "Invalid password!");
             }
