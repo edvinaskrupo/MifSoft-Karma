@@ -52,7 +52,7 @@ namespace Care.Controllers
             else
             {
                 ModelState.AddModelError("Email", "Invalid email or password");
-                return View("~/Views/Home/Index.cshtml");
+                return View("~/Views/Home/Index.cshttml");
             }
         }
 
@@ -73,7 +73,7 @@ namespace Care.Controllers
             {
                 ModelState.AddModelError("Name", "No such user!");
             }
-            return !ModelState.IsValid ? View(user) : View("~/Views/Home/Index.cshml", storedUser);
+            return !ModelState.IsValid ? View("~/Views/Home/Index.cshtml") : View("~/Views/Home/Index.cshtml", storedUser);
         }
 
         private bool UserModelExists(int id)
