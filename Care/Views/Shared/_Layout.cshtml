@@ -41,11 +41,13 @@
                     }
                     else
                     {
-                        <ul class="navbar-nav">
-                            <li class="nav-item">
-                                <button class="btn" type="button" id="signOutBtn">Sign Out</button>
-                            </li>
-                        </ul>
+                        <form asp-action="LogOut" method="get">
+                            <ul class="navbar-nav">
+                                <li class="nav-item">
+                                    <button class="btn" type="submit" id="logOutBtn">Log Out</button>
+                                </li>
+                            </ul>
+                        </form>
                     }
                 </div>
             </div>

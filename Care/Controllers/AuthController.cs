@@ -76,10 +76,13 @@ namespace Care.Controllers
             return !ModelState.IsValid ? View("~/Views/Home/Index.cshtml") : View("~/Views/Home/Index.cshtml", storedUser);
         }
 
-        private bool UserModelExists(int id)
+        [HttpGet]
+        public ViewResult LogOut()
         {
-            return _context.Users.Any(e => e.UserId == id);
+            HttpContext.Session.Clear();
+            return View("~/Views/Home/Index.cshtml");
         }
+
         private bool UserEmailExists(string emailAddress)
         {
             return _context.Users.Any(e => e.EmailAddress == emailAddress);
