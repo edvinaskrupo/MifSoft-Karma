@@ -7,18 +7,15 @@ using System.Threading.Tasks;
 
 namespace Care.Models
 {
-    public class UserModel
+    public class UserRegistrationModel
     {
         [Required]
-        [Key]
-        public int UserId { get; set; }
+        [DisplayName("Full name")]
+        public string FullName { get; set; }
         [Required]
         [DisplayName("Email address")]
         public string EmailAddress { get; set; }
         [Required]
-        public string PasswordHash { get; set; }
-        [Required]
-        public string PasswordSalt { get; set; }
-
+        public string Password { get; set; }
     }
 }
