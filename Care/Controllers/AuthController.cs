@@ -22,6 +22,11 @@ namespace Care.Controllers
             this.authenticator = new Authenticator();
         }
 
+        public IActionResult Index()
+        {
+            return View();
+        }
+
         public IActionResult SignUp()
         {
             return PartialView("/Views/Shared/_Registration.cshtml");
@@ -52,7 +57,7 @@ namespace Care.Controllers
             else
             {
                 ModelState.AddModelError("Email", "Invalid email or password");
-                return View("~/Views/Home/Index.cshttml");
+                return View("~/Views/Home/Index.cshtml");
             }
         }
 
