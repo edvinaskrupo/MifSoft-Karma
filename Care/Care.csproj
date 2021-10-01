@@ -38,5 +38,5 @@
   <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
     <Exec Command="npm run build --prefix $(ProjectDir)" />
   </Target>
-
+   
 </Project>
