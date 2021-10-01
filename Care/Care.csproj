@@ -6,16 +6,13 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Compile Remove="Views\Auth\**" />
-    <Content Remove="Views\Auth\**" />
-    <EmbeddedResource Remove="Views\Auth\**" />
-    <None Remove="Views\Auth\**" />
-  </ItemGroup>
-
-  <ItemGroup>
     <Content Include="Scripts\build\bundle.js" />
     <Content Include="Scripts\es6\main.js" />
     <Content Include="Scripts\es6\Scene.js" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="Views\Auth\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>
