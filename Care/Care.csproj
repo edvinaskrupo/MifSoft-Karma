@@ -12,7 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
-    <None Include="Views\Auth\Index.cshtml" />
+    <None Include="Views\Intro\Index.cshtml" />
   </ItemGroup>
 
   <ItemGroup>

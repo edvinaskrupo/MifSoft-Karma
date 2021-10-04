@@ -1,23 +1,22 @@
 ﻿import * as THREE from 'three'
 import { TweenMax as TM } from 'gsap'
-import vertexShader from './glsl/vertexShader.glsl'
-import fragmentShader from './glsl/fragmentShader.glsl'
 
 export default class Figure {
-    constructor(scene, cb) {
+    constructor(scene) {
         this.$image = document.querySelector('.tile__image')
         this.scene = scene
-        this.callback = cb
 
         this.loader = new THREE.TextureLoader()
 
-        this.image = this.loader.load(this.$image.src, () => {
-            this.start()
-        })
-        this.hover = this.loader.load(this.$image.dataset.hover)
+        this.image = this.loader.load(this.$image.src)
+        this.hoverImage = this.loader.load(this.$image.dataset.hover)
         this.$image.style.opacity = 0
         this.sizes = new THREE.Vector2(0, 0)
         this.offset = new THREE.Vector2(0, 0)
+
+        this.getSizes()
+
+        this.createMesh()
 
         this.mouse = new THREE.Vector2(0, 0)
         window.addEventListener('mousemove', ev => {
@@ -25,19 +24,10 @@ export default class Figure {
         })
     }
 
-    start() {
-        this.getSizes()
-
-        this.createMesh()
-
-        this.callback()
-    }
-
     getSizes() {
         const { width, height, top, left } = this.$image.getBoundingClientRect()
 
         this.sizes.set(width, height)
-
         this.offset.set(
             left - window.innerWidth / 2 + width / 2,
             -top + window.innerHeight / 2 - height / 2
@@ -45,24 +35,9 @@ export default class Figure {
     }
 
     createMesh() {
-        this.uniforms = {
-            u_image: { type: 't', value: this.image },
-            u_imagehover: { type: 't', value: this.hover },
-            u_mouse: { value: this.mouse },
-            u_time: { value: 0 },
-            u_res: {
-                value: new THREE.Vector2(window.innerWidth, window.innerHeight)
-            }
-        }
-
         this.geometry = new THREE.PlaneBufferGeometry(1, 1, 1, 1)
-        this.material = new THREE.ShaderMaterial({
-            uniforms: this.uniforms,
-            vertexShader: vertexShader,
-            fragmentShader: fragmentShader,
-            defines: {
-                PR: window.devicePixelRatio.toFixed(1)
-            }
+        this.material = new THREE.MeshBasicMaterial({
+            map: this.image
         })
 
         this.mesh = new THREE.Mesh(this.geometry, this.material)
@@ -83,9 +58,5 @@ export default class Figure {
             x: -this.mouse.y * 0.3,
             y: this.mouse.x * (Math.PI / 6)
         })
-    }
-
-    update() {
-        this.uniforms.u_time.value += 0.01
     }
 }

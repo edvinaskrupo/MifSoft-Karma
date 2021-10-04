@@ -32,6 +32,7 @@
     "raw-loader": "^4.0.2",
     "scrollmagic": "^2.0.8",
     "style-loader": "^3.3.0",
-    "three": "^0.133.0"
+    "three": "^0.133.0",
+    "util": "^0.12.4"
   }
 }

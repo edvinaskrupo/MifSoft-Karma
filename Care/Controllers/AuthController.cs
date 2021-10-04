@@ -52,6 +52,7 @@ namespace Care.Controllers
 
                 _context.Add(newUser);
                 await _context.SaveChangesAsync();
+                HttpContext.Session.SetString("User", newUser.EmailAddress);
                 return View("~/Views/Home/Index.cshtml");
             }
             else
@@ -85,7 +86,7 @@ namespace Care.Controllers
         public ViewResult LogOut()
         {
             HttpContext.Session.Clear();
-            return View("~/Views/Home/Index.cshtml");
+            return View("~/Views/Auth/Index.cshtml");
         }
 
         private bool UserEmailExists(string emailAddress)
