@@ -1,13 +1,14 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
 
 <div class="text-center">
     <h1 class="display-4">Welcome</h1>
-    <div style="text-align:left;">
+    <div style="text-align:left; margin-left: 400px;">
         <button class="btn" type="button" id="loginBtn">Log In</button>
-        <span style="float:right;">
+        <span style="float:right; margin-right: 400px;">
             <button class="btn" id="registrationBtn" type="button">Sign Up</button>
         </span>
     </div>

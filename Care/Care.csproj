@@ -6,12 +6,6 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Content Include="Scripts\build\bundle.js" />
-    <Content Include="Scripts\es6\main.js" />
-    <Content Include="Scripts\es6\Scene.js" />
-  </ItemGroup>
-
-  <ItemGroup>
     <None Include="Views\Intro\Index.cshtml" />
   </ItemGroup>
 
@@ -32,8 +26,5 @@
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="5.0.2" />
   </ItemGroup>
 
-  <Target Name="PreBuild" BeforeTargets="PreBuildEvent">
-    <Exec Command="npm run build --prefix $(ProjectDir)" />
-  </Target>
    
 </Project>
