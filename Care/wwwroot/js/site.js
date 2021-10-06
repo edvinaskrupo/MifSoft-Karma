@@ -31,7 +31,3 @@ $("#registrationBtn").click(function () {
         }
     });
 });
-
-document.getElementById('LandingVideoElement').addEventListener('ended', myHandler, false);
-function myHandler(e) {
-};
