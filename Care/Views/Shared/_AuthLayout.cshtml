@@ -1,0 +1,62 @@
+﻿@using Microsoft.AspNetCore.Http
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - Care</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" />
+</head>
+<body class="auth-page">
+    <header>
+        <nav class="navbar center-block navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
+            <div class="container special-elite">
+                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-md-center">
+                    <ul class="navbar-nav d-lg-flex align-items-center">
+                        <li class="nav-item h-100">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Contribute</a>
+                        </li>
+                        <li class="nav-item h-100">
+                            <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">
+                                <img id="img_logo" alt="Logo" src="@Url.Content("/Images/logo.png")" />
+                            </a>
+                        </li>
+                        <li class="nav-item h-100">
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Donate item</a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            @if (@Context.Session.GetString("User") != null)
+            {
+                <div class="navbar-collapse collapse  justify-content-end special-elite">
+                    <form asp-action="LogOut" method="get">
+                        <ul class="navbar-nav">
+                            <li class="nav-item">
+                                <button class="btn" type="submit" id="logOutBtn">Log Out</button>
+                            </li>
+                        </ul>
+                    </form>
+                </div>
+            }
+        </nav>
+    </header>
+    <div class="container">
+        <main role="main" class="pb-3">
+            @RenderBody()
+        </main>
+    </div>
+
+    <footer class=" footer text-muted special-elite">
+        <div class="container">
+            &copy; 2021 - Care - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>

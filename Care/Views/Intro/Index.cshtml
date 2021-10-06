@@ -1,0 +1,24 @@
+﻿@{
+    ViewData["Title"] = "Intro Page";
+    Layout = "~/Views/Shared/_IntroLayout.cshtml";
+}
+<form>
+    <div id="SiteWrapper">
+        <a href="/" class="Logo MenuLogo">
+            <svg xmlns="http://www.w3.org/2000/svg"></svg>
+            <div class="text-center">
+                <div data-template="HomeTemplate" data-title="Home" class="template HomeTemplate">
+                    <audio id="IntroSound" src="~/Videos/olders.mp4"></audio>
+                    <div style="position: fixed; z-index: 13; inset:105px; " class="LandingVideoContainer">
+                        <video src="~/Videos/olders.mp4" autoplay="autoplay" id="LandingVideoElement" style="width: 1000px; height: 600px; object-fit: cover; pointer-events: none;" playsinline="" preload="auto"></video>
+                        <audio src="~/Videos/olders.mp4"></audio>
+                    </div>
+                </div>
+            </div>
+        </a>
+        <div style="position: absolute; padding: 100px 100px 100px 100px; box-sizing: content-box; right: 0px; bottom: 0px; width: 99px; height: 41px; opacity: 1; transition: opacity 0.5s ease 0s; cursor: pointer;">
+            <a class="text-light" asp-area="" asp-controller="Home" asp-action="Index">Skip</a>
+        </div>
+    </div>
+</form>
+

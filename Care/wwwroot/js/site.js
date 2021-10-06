@@ -31,4 +31,3 @@ $("#registrationBtn").click(function () {
         }
     });
 });
-
