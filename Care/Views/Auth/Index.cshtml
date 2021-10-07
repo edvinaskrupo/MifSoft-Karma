@@ -1,4 +1,6 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Http
+
+@{
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
@@ -6,10 +8,16 @@
 
 <div class="text-center special-elite">
     <h1 class="display-4">Welcome</h1>
-    <div style="text-align:left; margin-left: 400px;">
+    
+    @if (@Context.Session.GetString("User") == null) {
+        <div style="text-align:left; margin-left: 400px;">
         <button class="btn" type="button" id="UserLoginBtn" onclick="openSite('/Auth/UserLogIn')">Login as user</button>
         <span style="float:right; margin-right: 400px;">
             <button class="btn" type="button" id="AdminLoginBtn" onclick="openSite('/Auth/AdminLogIn')">Login as admin</button>
         </span>
-    </div>
+        </div>
+    }
+    else {
+        <p>You are already logged in.</p>
+    }
 </div>
