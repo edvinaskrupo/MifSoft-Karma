@@ -1,8 +1,8 @@
 ﻿//  https://docs.microsoft.com/aspnet/core/client-side/bundling-and-minification
 
-$("#loginBtnUser").click(function () {
+$("#loginBtn").click(function () {
 
-    var url = "/Auth/UserLogIn";
+    var url = "/Auth/LogIn";
     $.ajax({
         url: url,
         cache: false,
@@ -16,9 +16,20 @@ $("#loginBtnUser").click(function () {
     });
 });
 
-$("#loginBtnAdmin").click(function () {
+function chooseLogin () {
+    var loginUser = document.getElementById("LoginUser");
+    var loginAdmin = document.getElementById("LoginAdmin");
+    var url;
 
-    var url = "/Auth/AdminLogIn";
+    if (loginUser.checked) {
+        url = "/Auth/UserLogIn";
+    }
+    else if (loginAdmin.checked) {
+        url = "/Auth/AdminLogIn";
+    }
+    else {
+        url = "/"
+    }
     $.ajax({
         url: url,
         cache: false,
@@ -30,7 +41,7 @@ $("#loginBtnAdmin").click(function () {
             alert("error : " + reponse);
         }
     });
-});
+};
 
 $("#registrationBtn").click(function () {
 
