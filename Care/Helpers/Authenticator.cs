@@ -16,6 +16,10 @@ namespace Care.Helpers
             return authorized;
         }
 
+        public bool AuthenticateAdmin(AdminModel admin) {
+            return true;
+        }
+
         public bool AuthenticateLogin(string pass, string hash, string salt)
         {
             bool authorizedLogin = PasswordManager.VerifyHashedPassword(pass, hash, salt);
