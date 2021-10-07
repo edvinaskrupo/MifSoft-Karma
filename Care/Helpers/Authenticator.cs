@@ -5,6 +5,7 @@ using System.Linq;
 using System.Net.Mail;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
+using System.IO;
 
 namespace Care.Helpers
 {
@@ -17,7 +18,20 @@ namespace Care.Helpers
         }
 
         public bool AuthenticateAdmin(AdminModel admin) {
-            return true;
+            StreamReader authFile = new StreamReader("auth");
+            String hash, salt;
+            try {
+                hash = authFile.ReadLine();
+                salt = authFile.ReadLine();
+            }
+            catch {
+                return false;
+            }
+            finally {
+                authFile.Close();
+            }
+
+            return PasswordManager.VerifyHashedPassword(admin.Password, hash, salt);
         }
 
         public bool AuthenticateLogin(string pass, string hash, string salt)
