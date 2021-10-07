@@ -37,6 +37,16 @@ namespace Care.Controllers
             return PartialView("/Views/Shared/_Login.cshtml");
         }
 
+        public IActionResult AdminLogIn()
+        {
+            return PartialView("/Views/Shared/_LoginAdmin.cshtml");
+        }
+
+        public IActionResult UserLogIn()
+        {
+            return PartialView("/Views/Shared/_LoginUser.cshtml");
+        }
+
         [HttpPost]
         public async Task<ViewResult> SignUp(UserRegistrationModel userModel)
         {
@@ -63,7 +73,7 @@ namespace Care.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> LogIn(UserRegistrationModel user)
+        public async Task<ViewResult> UserLogIn(UserRegistrationModel user)
         {
             var storedUser = await _context.Users.FirstOrDefaultAsync(m => m.EmailAddress == user.EmailAddress);
             if (storedUser != null)
@@ -80,6 +90,19 @@ namespace Care.Controllers
                 ModelState.AddModelError("Name", "No such user!");
             }
             return !ModelState.IsValid ? View("~/Views/Home/Index.cshtml") : View("~/Views/Home/Index.cshtml", storedUser);
+        }
+
+        [HttpPost]
+        public ViewResult AdminLogIn(AdminModel admin)
+        {
+            if (authenticator.AuthenticateAdmin(admin)) {
+                HttpContext.Session.SetString("User", "!admin");
+                return View("~/Views/Home/Index.cshtml");
+            }
+            else {
+                ModelState.AddModelError("Password", "Invalid password!");
+                return View("~/Views/Home/Index.cshtml");
+            }
         }
 
         [HttpGet]

@@ -1,10 +1,10 @@
 ﻿@model UserRegistrationModel
-<div id="registrationModal" class="modal fade" role="dialog">
+<div id="loginModal" class="modal show" role="dialog">
     <div class="modal-dialog">
-        <form asp-action="SignUp" method="post">
+        <form asp-action="UserLogIn" method="post">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h4 class="modal-title">Sign Up</h4>
+                    <h4 class="modal-title">Log In</h4>
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
                 </div>
                 <div class="modal-body">
@@ -16,29 +16,27 @@
                             <section>
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <div class="form-group">
-                                    <label asp-for="FullName"></label>
-                                    <input asp-for="FullName" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.FullName)
-                                </div>
-                                <div class="form-group">
                                     <label asp-for="EmailAddress"></label>
                                     <input asp-for="EmailAddress" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.EmailAddress)
+                                    <span asp-validation-for="EmailAddress" class="text-danger"></span>
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="Password"></label>
                                     <input asp-for="Password" type="password" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.Password)
+                                    <span asp-validation-for="Password" class="text-danger"></span>
                                 </div>
                             </section>
+                        </div>
+                        <div class="col-md-12" style="text-align:center">
+                            <button class="btn btn-link" type="button" onclick="openSite('/Auth/SignUp')">Not registered? Sign up here.</button>
                         </div>
                     </div>
                 </div>
                 <div class="modal-footer border-0">
-                    <button type="submit" class="btn btn-login m-auto"><span>Sign Up</span></button>
+                    <button type="submit" class="btn btn-login m-auto">Log In</button>
                 </div>
             </div>
-            </form>
+        </form>
     </div>
 </div>
 
