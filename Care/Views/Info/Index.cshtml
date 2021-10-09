@@ -1,0 +1,16 @@
+﻿@model InfoViewModel
+
+@{
+    ViewData["Title"] = "Info page";
+}
+@using Microsoft.AspNetCore.Http
+
+<div class="text-center special-elite">
+    @if (Model == null) {
+        <p>Invalid organisation ID.</p>
+    }
+    else {
+        <h2>Organisation-title</h2>
+        <h4>Current organisation id: @Model.Id</h4>
+    }
+</div>
