@@ -10,7 +10,9 @@
         <p>Invalid organisation ID.</p>
     }
     else {
-        <h2>Organisation-title</h2>
-        <h4>Current organisation id: @Model.Id</h4>
+        <h2>@Model.Title</h2>
+        <h4>@Model.LongDescription</h4>
+        <a href=@Model.HomeLink>Visit</a>
+        <a href=@Model.DonateLink>Donate</a>
     }
 </div>

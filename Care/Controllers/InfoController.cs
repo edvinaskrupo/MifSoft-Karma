@@ -11,9 +11,12 @@ namespace Care.Controllers
         public IActionResult Index(string id)
         {
             try {
-                int idInt = Int32.Parse(id);
+                UInt32 idInt = UInt32.Parse(id);
                 Models.InfoViewModel orgInfo = new Models.InfoViewModel {
-                    Id = idInt
+                    Title = "Organisation no. " + idInt,
+                    LongDescription = "This is the long description of organisation no. " + idInt + ". So far the database isn't ready, so the only thing that changes in the page is the ID. However, the homepage and donate links currently work as previous/next buttons to test if I can change hyperlinks dynamically.",
+                    HomeLink = "https://localhost:5001/Info/Index/" + (idInt - 1),
+                    DonateLink = "https://localhost:5001/Info/Index/" + (idInt + 1)
                 };
                 return View(orgInfo);
             }
