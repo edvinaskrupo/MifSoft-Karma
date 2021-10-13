@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Care.Models;
+using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,6 +12,16 @@ namespace Care.Controllers
         public IActionResult Index()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult AddDescription(ItemModel model)
+        {
+            if (ModelState.IsValid)
+            {
+                //TODO: addToDatabase(model.Description);
+            }
+            return RedirectToAction("Index");
         }
     }
 }

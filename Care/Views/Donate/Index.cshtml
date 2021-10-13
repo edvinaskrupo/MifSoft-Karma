@@ -20,9 +20,12 @@
     </div>
 </form>
 
-<p>
-    @Html.TextBoxFor(m => m.Description)
-</p>
+@using (Html.BeginForm("AddDescription", "Donate", FormMethod.Post))
+{
+    @Html.TextBoxFor(model => model.Description)
+    @Html.ValidationMessageFor(model => model.Description)
+    <button type="submit">Add item</button>
+}
 
 <script>
     async function AJAXSubmit(oFormElement) {
