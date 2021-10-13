@@ -65,6 +65,10 @@ a {
     background-image: url('/Images/admin.png');
 }
 
+.second {
+    float:right; 
+    margin-right: 400px;
+}
 
 .carousel-control-next {
     right: 200px !important;
@@ -80,6 +84,24 @@ a {
     bottom: -2px;
     max-width: 100%;
     width: 100%;
+}
+
+.content {
+    position: absolute;
+    bottom: 3.6rem;
+    width: 100%;
+    font-size: 1.4rem;
+}
+
+.title {
+    font-size: calc(2.5vw);
+    text-transform: uppercase;
+    margin-left: -10%;
+}
+
+.info-line {
+    display: block;
+    margin-left: 6.4%;
 }
 
 .btn-primary {
