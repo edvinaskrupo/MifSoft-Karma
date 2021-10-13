@@ -38,18 +38,31 @@ a {
 
 }
 
-.carousel-images-container .carousel-item .carousel-image {
-    max-height: 644px;
-    height: 644px;
-    width: 1850px;
-    background-attachment: fixed;
+    .carousel-images-container .carousel-item .carousel-background {
+        max-height: 644px;
+        height: 644px;
+        width: 1850px;
+        background-attachment: fixed;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: cover;
+    }
+
+.carousel-image {
+    max-height: 400px;
+    height: 400px;
+    width: 300px;
+    margin: 0;
+    position: absolute;
+    top: 30%;
+    transform: translate(-0%, -30%);
     background-position: center;
-    background-repeat: no-repeat;
-    background-size: cover;
 }
 
-.carousel-background {
-    background-image: url('/Images/auth-page.png');
+.first {
+    text-align: left;
+    margin-left: 25%;
+    background-image: url('/Images/admin.png');
 }
 
 
