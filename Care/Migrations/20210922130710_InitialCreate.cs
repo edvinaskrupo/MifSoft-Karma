@@ -20,30 +20,12 @@ namespace Care.Migrations
                 {
                     table.PrimaryKey("PK_Users", x => x.UserId);
                 });
-            migrationBuilder.CreateTable(
-                name: "Posts",
-                columns: table => new
-                {
-                PostId = table.Column<int>(type: "int", nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                OrgName = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                OrgShortDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                OrgLongDesc = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                OrgLogo = table.Column<string>(type: "nvarchar(max)", nullable: false),
-                OrgPhoto = table.Column<string>(type: "nvarchar(max)", nullable: false)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Users", x => x.PostId);
-                });
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Users");
-            migrationBuilder.DropTable(
-                name: "Posts");
         }
     }
 }

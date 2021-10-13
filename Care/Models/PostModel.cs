@@ -9,6 +9,8 @@ namespace Care.Models
 {
     public class PostModel
     {
+        [Key]
+        public int OrgId { get; set; }
         [Required]
         [DisplayName("Organization Name")]
         public string OrgName { get; set; }
@@ -17,6 +19,8 @@ namespace Care.Models
         [Required]
         [DisplayName("Long Organization Description")]
         public string OrgLongDescr { get; set; }
+        [DisplayName("Organization Link")]
+        public string OrgLink { get; set; }
         [Required]
         [DisplayName("Organization Logo")]
         public string OrgLogo { get; set; }
