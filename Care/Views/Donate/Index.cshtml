@@ -1,9 +1,11 @@
-﻿<form action="BufferedSingleFileUploadPhysical/?handler=Upload"
+﻿@model ItemModel
+
+<form action="BufferedSingleFileUploadPhysical/?handler=Upload"
       enctype="multipart/form-data" onsubmit="AJAXSubmit(this);return false;"
       method="post">
     <dl>
         <dt>
-            <label for="FileUpload_FormFile">File</label>
+            <label for="FileUpload_FormFile">Upload an Image</label>
         </dt>
         <dd>
             <input id="FileUpload_FormFile" type="file"
@@ -17,6 +19,10 @@
         <output name="result"></output>
     </div>
 </form>
+
+<p>
+    @Html.TextBoxFor(m => m.Description)
+</p>
 
 <script>
     async function AJAXSubmit(oFormElement) {
