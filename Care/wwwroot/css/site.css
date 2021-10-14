@@ -59,14 +59,24 @@ a {
 }
 
 .first {
+    border-radius: 30px;
     text-align: left;
-    margin-left: 25%;
+    margin-left: 23%;
     background-image: url('/Images/admin.png');
 }
 
 .second {
-    float:right; 
-    margin-right: 400px;
+    border-radius: 50px 20px;
+    float: right;
+    margin-left: 42%;
+    background-image: url('/Images/woman.png');
+}
+
+.third {
+    border-radius: 20px 50px;
+    text-align: right;
+    margin-left: 61%;
+    background-image: url('/Images/woman.png');
 }
 
 .carousel-control-next {
