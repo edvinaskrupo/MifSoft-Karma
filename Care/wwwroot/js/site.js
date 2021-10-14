@@ -14,4 +14,12 @@ function openSite(url) {
     });
 };
 
+var myelement = document.getElementById("bootsrap-Carousel");
 
+function changeByScroll() {
+    $('.carousel').carousel('next')
+}
+
+myelement.addEventListener('wheel', function (e) {
+    changeByScroll();
+});
