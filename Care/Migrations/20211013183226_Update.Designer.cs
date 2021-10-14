@@ -3,14 +3,16 @@ using Care.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Care.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    partial class ServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211013183226_Update")]
+    partial class Update
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -18,41 +20,12 @@ namespace Care.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Care.Models.PostModel", b =>
-                {
-                    b.Property<int>("OrgId")
-                    
             modelBuilder.Entity("Care.Models.ItemModel", b =>
                 {
                     b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("OrgLink")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrgLogo")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrgLongDescr")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrgName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrgPhoto")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("OrgShortDescr")
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("OrgId");
-
-                    b.ToTable("Posts");
 
                     b.Property<string>("ImageName")
                         .HasColumnType("nvarchar(100)");
@@ -62,7 +35,7 @@ namespace Care.Migrations
 
                     b.HasKey("ImageId");
 
-                    b.ToTable("Items");
+                    b.ToTable("Images");
                 });
 
             modelBuilder.Entity("Care.Models.UserModel", b =>
