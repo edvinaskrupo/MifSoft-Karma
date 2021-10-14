@@ -25,7 +25,7 @@ namespace Care.Controllers
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Images.ToListAsync());
+            return View(await _context.Items.ToListAsync());
         }
 
         // GET: Item/Details/5
@@ -36,7 +36,7 @@ namespace Care.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Images
+            var itemModel = await _context.Items
                 .FirstOrDefaultAsync(m => m.ImageId == id);
             if (itemModel == null)
             {
@@ -87,7 +87,7 @@ namespace Care.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Images.FindAsync(id);
+            var itemModel = await _context.Items.FindAsync(id);
             if (itemModel == null)
             {
                 return NotFound();
@@ -138,7 +138,7 @@ namespace Care.Controllers
                 return NotFound();
             }
 
-            var itemModel = await _context.Images
+            var itemModel = await _context.Items
                 .FirstOrDefaultAsync(m => m.ImageId == id);
             if (itemModel == null)
             {
@@ -153,15 +153,15 @@ namespace Care.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var itemModel = await _context.Images.FindAsync(id);
-            _context.Images.Remove(itemModel);
+            var itemModel = await _context.Items.FindAsync(id);
+            _context.Items.Remove(itemModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
         private bool ItemModelExists(int id)
         {
-            return _context.Images.Any(e => e.ImageId == id);
+            return _context.Items.Any(e => e.ImageId == id);
         }
     }
 }
