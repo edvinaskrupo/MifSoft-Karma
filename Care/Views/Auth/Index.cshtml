@@ -1,14 +1,13 @@
 ﻿@using Microsoft.AspNetCore.Http
 
 @{
-    ViewData["Title"] = "Home Page";
+    ViewData["Title"] = "Auth Page";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
 
 <div class="text-center special-elite">
     <h1 class="display-4">Welcome</h1>
-    
     @if (@Context.Session.GetString("User") == null) {
         <div style="text-align:left; margin-left: 400px;">
         <button class="btn" type="button" id="UserLoginBtn" onclick="openSite('/Auth/UserLogIn')">Login as user</button>
