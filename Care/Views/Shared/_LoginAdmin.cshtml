@@ -1,0 +1,37 @@
+@model AdminModel
+<div id="loginModal" class="modal show" role="dialog">
+    <div class="modal-dialog">
+        <form asp-action="AdminLogIn" method="post">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h4 class="modal-title">Log In</h4>
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                </div>
+
+                <div class="modal-body">
+                    <div id="login-as-admin">
+                        <div class="row justify-content-md-center">
+                            <img src="/Images/admin-login.png" />
+                        </div>
+                        <div class="row justify-content-md-center">
+                            <div class="col-md-6">
+                                <section>
+                                    <div asp-validation-summary="All" class="text-danger"></div>
+                                    <div class="form-group">
+                                        <label asp-for="Password"></label>
+                                        <input asp-for="Password" type="password" class="form-control" />
+                                        <span asp-validation-for="Password" class="text-danger"></span>
+                                    </div>
+                                </section>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="modal-footer border-0">
+                    <button type="submit" class="btn btn-login m-auto">Log In</button>
+                </div>
+            </div>
+        </form>
+    </div>
+</div>
