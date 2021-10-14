@@ -1,0 +1,22 @@
+﻿@model OrgModel
+
+@{
+    if (Model == null) {
+        ViewData["Title"] = "Error";
+    }
+    else {
+        ViewData["Title"] = Model.OrgName;
+    }
+}
+@using Microsoft.AspNetCore.Http
+
+<div class="text-center special-elite">
+    @if (Model == null) {
+        <p>An unexpected error occured. Try reloading the page.</p>
+    }
+    else {
+        <h2>@Model.OrgName</h2>
+        <h4>@Model.OrgLongDescr</h4>
+        <a href=@Model.OrgLink>Visit</a>
+    }
+</div>
