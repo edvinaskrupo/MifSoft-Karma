@@ -66,6 +66,7 @@ namespace Care.Controllers
                 string fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
                 string extension = Path.GetExtension(itemModel.ImageFile.FileName);
                 itemModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                Directory.CreateDirectory(wwwRootPath + "/ItemImages/");
                 string path = Path.Combine(wwwRootPath + "/ItemImages/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
