@@ -11,12 +11,12 @@ using System.IO;
 
 namespace Care.Controllers
 {
-    public class ImageController : Controller
+    public class ItemController : Controller
     {
         private readonly IWebHostEnvironment _hostEnvironment;
         private readonly ServiceDbContext _context;
 
-        public ImageController(ServiceDbContext context, IWebHostEnvironment hostEnvironment)
+        public ItemController(ServiceDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
             this._hostEnvironment = hostEnvironment;
@@ -36,14 +36,14 @@ namespace Care.Controllers
                 return NotFound();
             }
 
-            var imageModel = await _context.Images
+            var itemModel = await _context.Images
                 .FirstOrDefaultAsync(m => m.ImageId == id);
-            if (imageModel == null)
+            if (itemModel == null)
             {
                 return NotFound();
             }
 
-            return View(imageModel);
+            return View(itemModel);
         }
 
         // GET: Image/Create
@@ -57,26 +57,26 @@ namespace Care.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImageId,Name,ImageFile")] ImageModel imageModel)
+        public async Task<IActionResult> Create([Bind("ImageId,Name,ImageFile")] ItemModel itemModel)
         {
             if (ModelState.IsValid)
             {
                 //Save image to wwwroot/image
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(imageModel.ImageFile.FileName);
-                string extension = Path.GetExtension(imageModel.ImageFile.FileName);
-                imageModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                string fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
+                string extension = Path.GetExtension(itemModel.ImageFile.FileName);
+                itemModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 string path = Path.Combine(wwwRootPath + "/ItemImages/", fileName);
                 using (var fileStream = new FileStream(path, FileMode.Create))
                 {
-                    await imageModel.ImageFile.CopyToAsync(fileStream);
+                    await itemModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //Insert record
-                _context.Add(imageModel);
+                _context.Add(itemModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
-            return View(imageModel);
+            return View(itemModel);
         }
 
         // GET: Image/Edit/5
@@ -87,12 +87,12 @@ namespace Care.Controllers
                 return NotFound();
             }
 
-            var imageModel = await _context.Images.FindAsync(id);
-            if (imageModel == null)
+            var itemModel = await _context.Images.FindAsync(id);
+            if (itemModel == null)
             {
                 return NotFound();
             }
-            return View(imageModel);
+            return View(itemModel);
         }
 
         // POST: Image/Edit/5
@@ -100,9 +100,9 @@ namespace Care.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ImageId,Name,ImageName")] ImageModel imageModel)
+        public async Task<IActionResult> Edit(int id, [Bind("ImageId,Name,ImageName")] ItemModel itemModel)
         {
-            if (id != imageModel.ImageId)
+            if (id != itemModel.ImageId)
             {
                 return NotFound();
             }
@@ -111,12 +111,12 @@ namespace Care.Controllers
             {
                 try
                 {
-                    _context.Update(imageModel);
+                    _context.Update(itemModel);
                     await _context.SaveChangesAsync();
                 }
                 catch (DbUpdateConcurrencyException)
                 {
-                    if (!ImageModelExists(imageModel.ImageId))
+                    if (!ItemModelExists(itemModel.ImageId))
                     {
                         return NotFound();
                     }
@@ -127,7 +127,7 @@ namespace Care.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
-            return View(imageModel);
+            return View(itemModel);
         }
 
         // GET: Image/Delete/5
@@ -138,14 +138,14 @@ namespace Care.Controllers
                 return NotFound();
             }
 
-            var imageModel = await _context.Images
+            var itemModel = await _context.Images
                 .FirstOrDefaultAsync(m => m.ImageId == id);
-            if (imageModel == null)
+            if (itemModel == null)
             {
                 return NotFound();
             }
 
-            return View(imageModel);
+            return View(itemModel);
         }
 
         // POST: Image/Delete/5
@@ -153,13 +153,13 @@ namespace Care.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var imageModel = await _context.Images.FindAsync(id);
-            _context.Images.Remove(imageModel);
+            var itemModel = await _context.Images.FindAsync(id);
+            _context.Images.Remove(itemModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
         }
 
-        private bool ImageModelExists(int id)
+        private bool ItemModelExists(int id)
         {
             return _context.Images.Any(e => e.ImageId == id);
         }

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace Care.Models
 {
-    public class ImageModel
+    public class ItemModel
     {
         [Key]
         public int ImageId { get; set; }

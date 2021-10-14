@@ -18,7 +18,7 @@ namespace Care.Migrations
                 .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("Care.Models.ImageModel", b =>
+            modelBuilder.Entity("Care.Models.ItemModel", b =>
                 {
                     b.Property<int>("ImageId")
                         .ValueGeneratedOnAdd()
