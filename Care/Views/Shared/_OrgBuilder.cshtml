@@ -13,32 +13,32 @@
                             <section>
                                 <div asp-validation-summary="All" class="text-danger"></div>
                                 <div class="form-group">
-                                    <label asp-for="OrgName"></label>
+                                    <label asp-for="OrgName">Organization Name</label>
                                     <input asp-for="OrgName" class="form-control" />
                                     @Html.ValidationMessageFor(m => m.OrgName)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="OrgShortDescr"></label>
+                                    <label asp-for="OrgShortDescr">Quick Organization Description</label>
                                     <textarea class="form-control" asp-for="OrgShortDescr"></textarea>
                                     @Html.ValidationMessageFor(m => m.OrgShortDescr)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="OrgLongDescr"></label>
+                                    <label asp-for="OrgLongDescr">Longer Organization Description</label>
                                     <textarea class="form-control" asp-for="OrgLongDescr"></textarea>
                                     @Html.ValidationMessageFor(m => m.OrgLongDescr)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="OrgLink"></label>
+                                    <label asp-for="OrgLink">Link to Organization's Website</label>
                                     <input asp-for="OrgLink" class="form-control" />
                                     @Html.ValidationMessageFor(m => m.OrgLink)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="OrgLogo"></label>
+                                    <label asp-for="OrgLogo">Organization's Logo</label>
                                     <input class="form-control" asp-for="OrgLogo"/>
                                     @Html.ValidationMessageFor(m => m.OrgLogo)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="OrgPhoto"></label>
+                                    <label asp-for="OrgPhoto">Organization's Photo</label>
                                     <input class="form-control" asp-for="OrgPhoto">
                                     @Html.ValidationMessageFor(m => m.OrgPhoto)
                                 </div>
