@@ -28,18 +28,27 @@ a {
     transition-delay: 1s;
 }
 
+.carousel {
+    height: 100%;
+}
+
+.carousel-inner {
+    height: 100%;
+}
+
 .carousel-images-container {
     display: flex;
     justify-content: center;
+    height: 100%;
 }
 
-.carousel-images-container .carousel-item {
-
-}
+    .carousel-images-container .carousel-item {
+        height: 100%;
+    }
 
     .carousel-images-container .carousel-item .carousel-background {
-        max-height: 644px;
-        height: 644px;
+        max-height: 100%;
+        height: 100%;
         width: 1850px;
         background-attachment: fixed;
         background-position: center;
@@ -48,8 +57,8 @@ a {
     }
 
 .carousel-image {
-    max-height: 400px;
-    height: 400px;
+    max-height: 65%;
+    height: 65%;
     width: 300px;
     margin: 0;
     position: absolute;
@@ -193,12 +202,13 @@ html {
 body {
     /* Margin bottom by footer height */
     margin-bottom: 60px;
+    height: 100%;
 }
 
 .body-content {
     padding-left: 0px;
     padding-right: 0px;
-    height: fit-content;
+    height: 85.4%;
 }
 
 .auth-page {
@@ -209,6 +219,11 @@ body {
     text-align: center;
     margin: auto;
     padding: 0;
+    height: 100%;
+}
+
+.container {
+    height: 100%;
 }
 
 .footer {
