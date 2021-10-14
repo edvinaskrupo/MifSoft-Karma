@@ -155,6 +155,12 @@ namespace Care.Controllers
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
             var itemModel = await _context.Items.FindAsync(id);
+
+            //delete image from wwwroot/image
+            var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "ItemImages", itemModel.ImageName);
+            if (System.IO.File.Exists(imagePath))
+                System.IO.File.Delete(imagePath);
+            //delete the record
             _context.Items.Remove(itemModel);
             await _context.SaveChangesAsync();
             return RedirectToAction(nameof(Index));
