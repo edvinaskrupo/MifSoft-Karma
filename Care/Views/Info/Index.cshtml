@@ -1,0 +1,17 @@
+﻿@model InfoIndexViewModel
+
+@{
+    ViewData["Title"] = "List of Organisations";
+}
+@using Microsoft.AspNetCore.Http
+
+<div class="text-center special-elite">
+    @if (Model == null) {
+        <p>An unexpected error occured. Try reloading the page.</p>
+    }
+    else {
+        foreach (OrgModel org in Model.index) {
+            <h4><a href="~/Info/Index/@org.OrgId">@org.OrgName</a></h4>
+        }
+    }
+</div>

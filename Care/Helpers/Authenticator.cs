@@ -18,20 +18,23 @@ namespace Care.Helpers
         }
 
         public bool AuthenticateAdmin(AdminModel admin) {
-            StreamReader authFile = new StreamReader("auth");
             String hash, salt;
             try {
-                hash = authFile.ReadLine();
-                salt = authFile.ReadLine();
+                using (StreamReader authFile = new StreamReader("auth")) {
+                    hash = authFile.ReadLine();
+                    salt = authFile.ReadLine();
+                }
             }
             catch {
                 return false;
             }
-            finally {
-                authFile.Close();
-            }
 
-            return PasswordManager.VerifyHashedPassword(admin.Password, hash, salt);
+            if (hash == null || salt == null) {
+                return false;
+            }
+            else {
+                return PasswordManager.VerifyHashedPassword(admin.Password, hash, salt);
+            }
         }
 
         public bool AuthenticateLogin(string pass, string hash, string salt)
