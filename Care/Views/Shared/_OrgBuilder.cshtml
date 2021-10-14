@@ -1,7 +1,7 @@
-﻿@model PostModel
-<div id="registrationModal" class="modal fade" role="dialog">
+﻿@model NewPostModel
+<div id="postModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
-        <form asp-action="SignUp" method="post">
+        <form asp-action="AddOrg" method="post">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add New Organization</h4>
@@ -18,14 +18,14 @@
                                     @Html.ValidationMessageFor(m => m.OrgName)
                                 </div>
                                 <div class="form-group">
-                                    <label asp-for="OrgLongDescr"></label>
-                                    <textarea class="form-control" asp-for="OrgLongDescr"></textarea>
-                                    @Html.ValidationMessageFor(m => m.OrgLongDescr)
-                                </div>
-                                <div class="form-group">
                                     <label asp-for="OrgShortDescr"></label>
                                     <textarea class="form-control" asp-for="OrgShortDescr"></textarea>
                                     @Html.ValidationMessageFor(m => m.OrgShortDescr)
+                                </div>
+                                <div class="form-group">
+                                    <label asp-for="OrgLongDescr"></label>
+                                    <textarea class="form-control" asp-for="OrgLongDescr"></textarea>
+                                    @Html.ValidationMessageFor(m => m.OrgLongDescr)
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgLink"></label>
@@ -34,14 +34,13 @@
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgLogo"></label>
-                                    <input type="file" class="form-control-file">
-                                    <!-- Need to fix variables for uploading files.-->
-                                    @Html.ValidationMessageFor(m => m.OrgShortDescr)
+                                    <input class="form-control" asp-for="OrgLogo"/>
+                                    @Html.ValidationMessageFor(m => m.OrgLogo)
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgPhoto"></label>
-                                    <input type="file" class="form-control-file">
-                                    @Html.ValidationMessageFor(m => m.OrgShortDescr)
+                                    <input class="form-control" asp-for="OrgPhoto">
+                                    @Html.ValidationMessageFor(m => m.OrgPhoto)
                                 </div>
                             </section>
                         </div>
