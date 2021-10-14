@@ -15,5 +15,6 @@ namespace Care.Models
 
         public DbSet<UserModel> Users { get; set; }
         public DbSet<OrgModel> Posts { get; set; }
+        public DbSet<ItemModel> Items { get; set; }
     }
 }

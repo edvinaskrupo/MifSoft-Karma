@@ -1,8 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Http
 <!DOCTYPE html>
-<html lang="en">
-
-
+<html lang="en" style="height:100%">
 <head>
 
     <meta charset="utf-8" />
@@ -26,7 +24,7 @@
                             </a>
                         </li>
                         <li class="nav-item h-100">
-                            <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Donate item</a>
+                            <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Upload">Donate item</a>
                         </li>
                     </ul>
                 </div>
@@ -47,7 +45,7 @@
         </nav>
     </header>
     <div class="body-content">
-        <main role="main" class="">
+        <main role="main" style="height:100%">
             @RenderBody()
         </main>
     </div>
