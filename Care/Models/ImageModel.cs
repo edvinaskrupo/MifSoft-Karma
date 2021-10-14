@@ -15,7 +15,7 @@ namespace Care.Models
         public int ImageId { get; set; }
 
         [Column(TypeName = "nvarchar(50)")]
-        public string Title { get; set; }
+        public string Name { get; set; }
 
         [Column(TypeName = "nvarchar(100)")]
         [DisplayName("Image Name")]

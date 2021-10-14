@@ -14,14 +14,5 @@ namespace Care.Controllers
             return View();
         }
 
-        [HttpPost]
-        public ActionResult AddDescription(ItemModel model)
-        {
-            if (ModelState.IsValid)
-            {
-                //TODO: addToDatabase(model.Description);
-            }
-            return RedirectToAction("Index");
-        }
     }
 }
