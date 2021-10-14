@@ -22,13 +22,13 @@ namespace Care.Controllers
             this._hostEnvironment = hostEnvironment;
         }
 
-        // GET: Image
+        // GET: Item
         public async Task<IActionResult> Index()
         {
             return View(await _context.Images.ToListAsync());
         }
 
-        // GET: Image/Details/5
+        // GET: Item/Details/5
         public async Task<IActionResult> Details(int? id)
         {
             if (id == null)
@@ -46,22 +46,22 @@ namespace Care.Controllers
             return View(itemModel);
         }
 
-        // GET: Image/Create
-        public IActionResult Create()
+        // GET: Item/Upload
+        public IActionResult Upload()
         {
             return View();
         }
 
-        // POST: Image/Create
+        // POST: Item/Upload
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("ImageId,Name,ImageFile")] ItemModel itemModel)
+        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile")] ItemModel itemModel)
         {
             if (ModelState.IsValid)
             {
-                //Save image to wwwroot/image
+                //Save image to wwwroot/ItemImages
                 string wwwRootPath = _hostEnvironment.WebRootPath;
                 string fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
                 string extension = Path.GetExtension(itemModel.ImageFile.FileName);
@@ -79,7 +79,7 @@ namespace Care.Controllers
             return View(itemModel);
         }
 
-        // GET: Image/Edit/5
+        // GET: Item/Edit/5
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null)
@@ -95,7 +95,7 @@ namespace Care.Controllers
             return View(itemModel);
         }
 
-        // POST: Image/Edit/5
+        // POST: Item/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
@@ -130,7 +130,7 @@ namespace Care.Controllers
             return View(itemModel);
         }
 
-        // GET: Image/Delete/5
+        // GET: Item/Delete/5
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null)
@@ -148,7 +148,7 @@ namespace Care.Controllers
             return View(itemModel);
         }
 
-        // POST: Image/Delete/5
+        // POST: Item/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
