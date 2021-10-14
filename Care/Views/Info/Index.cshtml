@@ -1,7 +1,12 @@
-﻿@model InfoViewModel
+﻿@model OrgModel
 
 @{
-    ViewData["Title"] = "Info page";
+    if (Model == null) {
+        ViewData["Title"] = "Error";
+    }
+    else {
+        ViewData["Title"] = Model.OrgName;
+    }
 }
 @using Microsoft.AspNetCore.Http
 
@@ -10,9 +15,8 @@
         <p>Invalid organisation ID.</p>
     }
     else {
-        <h2>@Model.Title</h2>
-        <h4>@Model.LongDescription</h4>
-        <a href=@Model.HomeLink>Visit</a>
-        <a href=@Model.DonateLink>Donate</a>
+        <h2>@Model.OrgName</h2>
+        <h4>@Model.OrgLongDescr</h4>
+        <a href=@Model.OrgLink>Visit</a>
     }
 </div>
