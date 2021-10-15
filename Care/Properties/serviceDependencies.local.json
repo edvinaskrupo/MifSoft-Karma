@@ -3,10 +3,10 @@
     "secrets1": {
       "type": "secrets.user"
     },
-    "mssql1": {
+    "mssql2": {
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/caredbserver/databases/Care_db",
       "type": "mssql.azure",
-      "connectionId": "DefaultConnection",
+      "connectionId": "ConnectionStrings:DefaultConnection",
       "secretStore": "LocalSecretsFile"
     }
   }

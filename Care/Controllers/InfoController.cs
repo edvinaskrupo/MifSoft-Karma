@@ -20,7 +20,7 @@ namespace Care.Controllers
         {
             try {
                 UInt32 idInt = UInt32.Parse(id);
-                OrgModel org = _context.Posts.FirstOrDefault(m => m.OrgId == idInt);
+                PostModel org = _context.Posts.FirstOrDefault(m => m.OrgId == idInt);
                 if (org == null) {
                     return View(indexRetriever.retrieveIndex(_context));
                 }

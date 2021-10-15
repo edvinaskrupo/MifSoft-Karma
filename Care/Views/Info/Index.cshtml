@@ -10,7 +10,7 @@
         <p>An unexpected error occured. Try reloading the page.</p>
     }
     else {
-        foreach (OrgModel org in Model.index) {
+        foreach (PostModel org in Model.index) {
             <h4><a href="~/Info/Index/@org.OrgId">@org.OrgName</a></h4>
         }
     }

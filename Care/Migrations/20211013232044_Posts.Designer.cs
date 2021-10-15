@@ -3,28 +3,26 @@ using Care.Models;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace Care.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    partial class ServiceDbContextModelSnapshot : ModelSnapshot
+    [Migration("20211013232044_Posts")]
+    partial class Posts
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.11")
+                .HasAnnotation("ProductVersion", "5.0.10")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
             modelBuilder.Entity("Care.Models.PostModel", b =>
                 {
-                    b.Property<int>("OrgId");
-                    
-            modelBuilder.Entity("Care.Models.ItemModel", b =>
-                {
-                    b.Property<int>("ImageId")
+                    b.Property<int>("OrgId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
@@ -53,16 +51,6 @@ namespace Care.Migrations
                     b.HasKey("OrgId");
 
                     b.ToTable("Posts");
-
-                    b.Property<string>("ImageName")
-                        .HasColumnType("nvarchar(100)");
-
-                    b.Property<string>("Name")
-                        .HasColumnType("nvarchar(50)");
-
-                    b.HasKey("ImageId");
-
-                    b.ToTable("Items");
                 });
 
             modelBuilder.Entity("Care.Models.UserModel", b =>
@@ -89,7 +77,6 @@ namespace Care.Migrations
                     b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
-                });
         }
     }
 }

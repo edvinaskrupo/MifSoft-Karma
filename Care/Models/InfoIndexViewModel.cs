@@ -2,6 +2,6 @@
 {
     public class InfoIndexViewModel
     {
-        public OrgModel[] index;
+        public PostModel[] index;
     }
 }
