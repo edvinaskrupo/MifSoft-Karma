@@ -1,7 +1,4 @@
 
-
-
-
 function openSite(url) {
     $.ajax({
         url: url,
@@ -15,3 +12,13 @@ function openSite(url) {
         }
     });
 }
+
+var myelement = document.getElementById("bootsrap-Carousel");
+
+function changeByScroll() {
+    $('.carousel').carousel('next')
+}
+
+myelement.addEventListener('wheel', function (e) {
+    changeByScroll();
+}); 
