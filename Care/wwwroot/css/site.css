@@ -96,14 +96,6 @@ a {
     left: 180px !important;
 }
 
-.carousel-frame {
-    position: absolute;
-    z-index: 1;
-    bottom: -2px;
-    max-width: 100%;
-    width: 100%;
-}
-
 .content {
     position: absolute;
     bottom: 3.6rem;
