@@ -20,7 +20,7 @@ namespace Care.Migrations
 
             modelBuilder.Entity("Care.Models.PostModel", b =>
                 {
-                    b.Property<int>("OrgId")
+                    b.Property<int>("OrgId");
                     
             modelBuilder.Entity("Care.Models.ItemModel", b =>
                 {
@@ -89,6 +89,7 @@ namespace Care.Migrations
                     b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
+                });
         }
     }
 }

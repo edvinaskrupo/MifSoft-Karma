@@ -20,7 +20,6 @@ namespace Care.Models
         public string OrgLink { get; set; }
         [Required]
         public string OrgLogo { get; set; }
-        [Required]
         public string OrgPhoto { get; set; }
     }
 }
