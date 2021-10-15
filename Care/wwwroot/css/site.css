@@ -114,12 +114,6 @@ a {
     margin-left: 6.4%;
 }
 
-.image-circle {
-    height: 35px;
-    width: 100px;
-    background-image: url('../Images/circle.png');
-}
-
 .btn-primary {
     color: #fff;
     background-color: #1b6ec2;
@@ -220,7 +214,7 @@ body {
 
 .footer {
     position: absolute;
-    bottom: 0;
+    bottom: -2px;
     width: 100%;
     white-space: nowrap;
     line-height: 60px; /* Vertically center the text there */
