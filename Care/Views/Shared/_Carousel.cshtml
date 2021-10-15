@@ -15,46 +15,46 @@
                 }
             </ol>
             <div class="carousel-inner">
-                <div class="carousel-item active">
-                    <div class='carousel-background'>
-                        <div class="carousel-image first">
-                            <div class="content special-elite">
-                                <h2 class="title">
-                                    <span class="line">Red Cross <br />Society</span>
-                                </h2>
-                                <div class="info-line">
-                                    <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
+
+                @{
+                    for (int j = 0; j < Model.Count; j += 3)
+                    {
+                        <div class="carousel-item @(j == 0 ? "active" : "")">
+                            <div class='carousel-background'>
+                                <div class="carousel-image first">
+                                    <div class="content special-elite">
+                                        <h2 class="title">
+                                            <span class="line">Red Cross <br />Society</span>
+                                        </h2>
+                                        <div class="info-line">
+                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-image second">
+                                    <div class="content special-elite">
+                                        <h2 class="title">
+                                            <span class="line">Red Cross <br />Society</span>
+                                        </h2>
+                                        <div class="info-line">
+                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="carousel-image third">
+                                    <div class="content special-elite">
+                                        <h2 class="title">
+                                            <span class="line">Red Cross <br />Society</span>
+                                        </h2>
+                                        <div class="info-line">
+                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
-                        <div class="carousel-image second">
-                            <div class="content special-elite">
-                                <h2 class="title">
-                                    <span class="line">Red Cross <br />Society</span>
-                                </h2>
-                                <div class="info-line">
-                                    <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="carousel-image third">
-                            <div class="content special-elite">
-                                <h2 class="title">
-                                    <span class="line">Red Cross <br />Society</span>
-                                </h2>
-                                <div class="info-line">
-                                    <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="carousel-item">
-                    <div class='carousel-background'>
-                        <div class="carousel-image first"></div>
-                    </div>
-                </div>
-            </div>
+                    }
+                }
             <a class="carousel-control-prev" href="#bootsrap-Carousel" role="button" data-slide="prev">
                 <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                 <span class="sr-only">Previous</span>
