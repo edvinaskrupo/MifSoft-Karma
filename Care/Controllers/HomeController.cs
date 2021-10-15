@@ -1,5 +1,6 @@
 ﻿using Care.Models;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Collections.Generic;
@@ -12,15 +13,18 @@ namespace Care.Controllers
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;
+        private ServiceDbContext db;
 
-        public HomeController(ILogger<HomeController> logger)
+        public HomeController(ILogger<HomeController> logger, ServiceDbContext db)
         {
             _logger = logger;
+            this.db = db;
         }
 
-        public IActionResult Index()
+        public async Task<IActionResult> IndexAsync()
         {
-            return View();
+            var posts = await db.Posts.ToListAsync();
+            return View(posts);
         }
 
         public IActionResult Privacy()

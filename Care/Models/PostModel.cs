@@ -4,10 +4,11 @@ using System.Linq;
 using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
+using System.Collections;
 
 namespace Care.Models
 {
-    public class PostModel
+    public class PostModel : IEnumerable
     {
         [Required]
         [Key]
@@ -21,5 +22,10 @@ namespace Care.Models
         [Required]
         public string OrgLogo { get; set; }
         public string OrgPhoto { get; set; }
+
+        public IEnumerator GetEnumerator()
+        {
+            return (IEnumerator)GetEnumerator();
+        }
     }
 }
