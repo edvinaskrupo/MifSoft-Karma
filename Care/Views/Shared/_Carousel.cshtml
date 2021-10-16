@@ -1,6 +1,4 @@
-﻿@{ 
-    List<PostModel> posts = ViewData["posts"] as List<PostModel>;
-}
+﻿@model Posts
 <div class="animation_bg">
     <div class="animation_overflow animation_easing"></div>
     <div class="container carousel-images-container">
@@ -8,19 +6,27 @@
             <ol class="carousel-indicators">
                 <li data-target="#bootsrap-Carousel" data-slide-to="0" class="active"></li>
                 @{
-                    for (int i = 1, j = 3; j < Model.Count; i++, j += 3)
+                    for (int i = 1, j = 3; j < Model.Count(); i++, j += 3)
                     {
                         <li data-target="#bootsrap-Carousel" data-slide-to="i"></li>
                     }
                 }
             </ol>
             <div class="carousel-inner">
-
+                @{using (IEnumerator<PostModel> post = Model.GetEnumerator())
+                    {
+                        while(post.MoveNext())
+                            @post.Current.OrgName;
+                    }
+                }
                 @{
-                    for (int j = 0; j < Model.Count; j += 3)
+                    for (int j = 0; j < Model.Count(); j += 3)
                     {
                         <div class="carousel-item @(j == 0 ? "active" : "")">
                             <div class='carousel-background'>
+
+
+
                                 <div class="carousel-image first">
                                     <div class="content special-elite">
                                         <h2 class="title">
@@ -51,18 +57,19 @@
                                         </div>
                                     </div>
                                 </div>
+
                             </div>
                         </div>
                     }
                 }
-            <a class="carousel-control-prev" href="#bootsrap-Carousel" role="button" data-slide="prev">
-                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-                <span class="sr-only">Previous</span>
-            </a>
-            <a class="carousel-control-next" href="#bootsrap-Carousel" role="button" data-slide="next">
-                <span class="carousel-control-next-icon" aria-hidden="true"></span>
-                <span class="sr-only">Next</span>
-            </a>
+                <a class="carousel-control-prev" href="#bootsrap-Carousel" role="button" data-slide="prev">
+                    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Previous</span>
+                </a>
+                <a class="carousel-control-next" href="#bootsrap-Carousel" role="button" data-slide="next">
+                    <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                    <span class="sr-only">Next</span>
+                </a>
+            </div>
         </div>
     </div>
-</div>

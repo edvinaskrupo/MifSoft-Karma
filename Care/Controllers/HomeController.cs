@@ -21,10 +21,11 @@ namespace Care.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> IndexAsync()
+        public async Task<IActionResult> Index()
         {
-            var posts = await db.Posts.ToListAsync();
-            return View(posts);
+            Posts postList = new Posts(db.Posts.ToArray());
+          //  var posts = await db.Posts.ToListAsync();
+            return View(postList);
         }
 
         public IActionResult Privacy()
