@@ -38,6 +38,18 @@ namespace Care.Models
             this.array = array;
         }
 
+        public int IndexOf(IEnumerable<PostModel> source, PostModel value)
+        {
+            int index = 0;
+            var comparer = EqualityComparer<PostModel>.Default; 
+            foreach (PostModel item in source)
+            {
+                if (comparer.Equals(item, value)) return index;
+                index++;
+            }
+            return -1;
+        }
+
         public IEnumerator<PostModel> GetEnumerator() => new PostsEnum(array);
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
@@ -57,7 +69,7 @@ namespace Care.Models
 
             object IEnumerator.Current => Current;
 
-            public bool MoveNext()
+        public bool MoveNext()
             {
                 index++;
                 return index < array.Length;
@@ -70,5 +82,6 @@ namespace Care.Models
 
             public void Dispose()
             { }
-        }
+    }
+
     }

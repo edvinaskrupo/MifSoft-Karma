@@ -15,8 +15,11 @@
             <div class="carousel-inner">
                 @{using (IEnumerator<PostModel> post = Model.GetEnumerator())
                     {
-                        while(post.MoveNext())
+                        while (post.MoveNext())
+                        {
                             @post.Current.OrgName;
+                            @Model.IndexOf(Model, post.Current);
+                        }
                     }
                 }
                 @{
@@ -73,3 +76,4 @@
             </div>
         </div>
     </div>
+</div>
