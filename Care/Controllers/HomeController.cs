@@ -24,7 +24,6 @@ namespace Care.Controllers
         public async Task<IActionResult> Index()
         {
             Posts postList = new Posts(db.Posts.ToArray());
-          //  var posts = await db.Posts.ToListAsync();
             return View(postList);
         }
 
