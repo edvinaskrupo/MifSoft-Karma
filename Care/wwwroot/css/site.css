@@ -68,15 +68,15 @@ a {
 }
 
 .first {
-    border-radius: 30px;
+    border-radius: 50px 20px;
     text-align: left;
     margin-left: 23%;
     background-image: url('/Images/admin.png');
 }
 
 .second {
-    border-radius: 50px 20px;
-    float: right;
+    border-radius: 30px;
+    text-align: center;
     margin-left: 42%;
     background-image: url('/Images/woman.png');
 }
@@ -107,11 +107,13 @@ a {
     font-size: calc(2.5vw);
     text-transform: uppercase;
     margin-left: -10%;
+    margin-right: -10%;
 }
 
 .info-line {
     display: inline-block;
     margin-left: 6.4%;
+    margin-right: 6.4%;
 }
 
 .btn-primary {
