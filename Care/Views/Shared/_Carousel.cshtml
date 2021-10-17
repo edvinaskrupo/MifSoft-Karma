@@ -15,18 +15,14 @@
                 }
             </ol>
             <div class="carousel-inner">
-                @{
-                    for (int j = 0; j < Model.Count(); j += 3)
+                @{for (int j = 0; j < Model.Count(); j += 3)
                     {
                         <div class="carousel-item @(j == 0 ? "active" : "")">
                             <div class='carousel-background'>
-
                                 @{using (IEnumerator<PostModel> post = Model.GetEnumerator())
                                     {
                                         while (post.MoveNext()) 
                                         {
-                                            //@post.Current.OrgName;
-
                                             if (@Model.IndexOf(Model, post.Current).Equals(j + 3)) 
                                                 break;
                                             if (@Model.IndexOf(Model, post.Current) < j + 3 && @Model.IndexOf(Model, post.Current) >= j)  
@@ -34,10 +30,10 @@
                                                 <div value="@Model.IndexOf(Model, post.Current)" class="carousel-image">
                                                     <div class="content special-elite">
                                                         <h2 class="title">
-                                                            <span class="line">Red Cross <br />Society</span>
+                                                            <span class="line">@post.Current.OrgName.Replace(System.Environment.NewLine, "<br />")</span>
                                                         </h2>
                                                         <div class="info-line">
-                                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
+                                                            <a href="~/Info/Index/@post.Current.OrgId"><span class="btn-inline">See more</span></a>
                                                         </div>
                                                     </div>
                                                 </div>
