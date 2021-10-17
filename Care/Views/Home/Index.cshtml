@@ -1,8 +1,9 @@
-﻿@{
+﻿@model Posts
+@{
     ViewData["Title"] = "Home Page";
 }
 @using Microsoft.AspNetCore.Http
 
 @{
-    Html.RenderPartial("_Carousel");
+    Html.RenderPartial("_Carousel", Model, ViewData);
 }
