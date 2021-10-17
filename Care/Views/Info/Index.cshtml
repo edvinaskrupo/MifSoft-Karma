@@ -12,7 +12,8 @@
 
 <div class="text-center special-elite">
     @if (Model == null) {
-        <p>An unexpected error occured. Try reloading the page.</p>
+        <p>An error occured. The requested organisation either doesn't exist or its ID is invalid.</p>
+        <p><a href="~/Home">Go back home</a></p>
     }
     else {
         <h2>@Model.OrgName</h2>

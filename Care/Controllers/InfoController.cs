@@ -9,12 +9,9 @@ namespace Care.Controllers
     public class InfoController : Controller
     {
         private readonly ServiceDbContext _context;
-        private IndexRetriever indexRetriever;
-
         public InfoController(ServiceDbContext context)
         {
             _context = context;
-            indexRetriever = new IndexRetriever();
         }
         public IActionResult Index(string id)
         {
@@ -22,15 +19,16 @@ namespace Care.Controllers
                 UInt32 idInt = UInt32.Parse(id);
                 PostModel org = _context.Posts.FirstOrDefault(m => m.OrgId == idInt);
                 if (org == null) {
-                    return View(indexRetriever.retrieveIndex(_context));
+                    ModelState.AddModelError("Info error", "Requested organisation doesn't exist");
+                    return View();
                 }
                 else {
-                    return View("~/Views/Info/Org.cshtml", org);
+                    return View(org);
                 }
             }
             catch {
-                ModelState.AddModelError("ID parsing", "Organisation ID must be an integer!");
-                return View(indexRetriever.retrieveIndex(_context));
+                ModelState.AddModelError("Info error", "Organisation ID must be an integer!");
+                return View();
             }
         }
     }
