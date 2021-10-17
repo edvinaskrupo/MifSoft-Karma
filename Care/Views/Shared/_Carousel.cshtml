@@ -1,4 +1,6 @@
 ﻿@model Posts
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
 <div class="animation_bg">
     <div class="animation_overflow animation_easing"></div>
     <div class="container carousel-images-container">
@@ -13,58 +15,41 @@
                 }
             </ol>
             <div class="carousel-inner">
-                @{using (IEnumerator<PostModel> post = Model.GetEnumerator())
-                    {
-                        while (post.MoveNext())
-                        {
-                            @post.Current.OrgName;
-                            @Model.IndexOf(Model, post.Current);
-                        }
-                    }
-                }
                 @{
                     for (int j = 0; j < Model.Count(); j += 3)
                     {
                         <div class="carousel-item @(j == 0 ? "active" : "")">
                             <div class='carousel-background'>
 
+                                @{using (IEnumerator<PostModel> post = Model.GetEnumerator())
+                                    {
+                                        while (post.MoveNext()) 
+                                        {
+                                            //@post.Current.OrgName;
 
-
-                                <div class="carousel-image first">
-                                    <div class="content special-elite">
-                                        <h2 class="title">
-                                            <span class="line">Red Cross <br />Society</span>
-                                        </h2>
-                                        <div class="info-line">
-                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-image second">
-                                    <div class="content special-elite">
-                                        <h2 class="title">
-                                            <span class="line">Red Cross <br />Society</span>
-                                        </h2>
-                                        <div class="info-line">
-                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="carousel-image third">
-                                    <div class="content special-elite">
-                                        <h2 class="title">
-                                            <span class="line">Red Cross <br />Society</span>
-                                        </h2>
-                                        <div class="info-line">
-                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
-                                        </div>
-                                    </div>
-                                </div>
-
+                                            if (@Model.IndexOf(Model, post.Current).Equals(j + 3)) 
+                                                break;
+                                            if (@Model.IndexOf(Model, post.Current) < j + 3 && @Model.IndexOf(Model, post.Current) >= j)  
+                                            {
+                                                <div value="@Model.IndexOf(Model, post.Current)" class="carousel-image">
+                                                    <div class="content special-elite">
+                                                        <h2 class="title">
+                                                            <span class="line">Red Cross <br />Society</span>
+                                                        </h2>
+                                                        <div class="info-line">
+                                                            <a asp-controller="Home" asp-action="Index"><span class="btn-inline">See more</span></a>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            }
+                                        }
+                                    }
+                                }
                             </div>
                         </div>
                     }
                 }
+                <script type="text/javascript">addClassToItem()</script>
                 <a class="carousel-control-prev" href="#bootsrap-Carousel" role="button" data-slide="prev">
                     <span class="carousel-control-prev-icon" aria-hidden="true"></span>
                     <span class="sr-only">Previous</span>
