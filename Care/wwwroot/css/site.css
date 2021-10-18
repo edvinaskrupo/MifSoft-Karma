@@ -229,3 +229,170 @@ body {
 .special-elite {
     font-family: 'Special Elite';
 }
+
+
+/* auth form style 
+-------------------------------------------------- */
+
+
+.form-card {
+    margin: 0 3% 20px 3%;
+}
+
+input {
+    padding: 0px 8px 4px 8px;
+    border: none;
+    border-bottom: 1px solid #ccc;
+    margin-bottom: 25px;
+    margin-top: 2px;
+    width: 100%;
+}
+
+.role-button {
+    width: 60%;
+    height: 50px;
+    background: none;
+    margin-left: 90px;
+    border-radius: 15px;
+}
+
+.user-btn-border {
+    border: 1px solid black
+}
+
+.role-button:hover {
+    border: 1px solid #64b6ac
+}
+
+#msform {
+    text-align: center;
+    position: relative;
+    margin-top: 20px
+}
+
+    #msform fieldset {
+        padding-bottom: 20px;
+    }
+
+        #msform fieldset:not(:first-of-type) {
+            display: none
+        }
+
+        #msform fieldset .form-card {
+            text-align: left;
+            color: #9E9E9E
+        }
+
+    #msform input:focus,
+    #msform textarea:focus {
+        border: none;
+        font-weight: bold;
+        border-bottom: 2px solid #64b6ac;
+        outline-width: 0
+    }
+
+    #msform .action-button, .action-button-previous {
+        width: 100px;
+        background: #64b6ac;
+        font-weight: bold;
+        color: white;
+        border: 0 none;
+        border-radius: 15px;
+        cursor: pointer;
+        padding: 10px 5px;
+        margin: 10px 5px
+    }
+
+    #msform .action-button-previous {
+        background: #508991;
+    }
+
+        #msform .action-button:hover,
+        #msform .action-button:focus {
+            box-shadow: 0 0 0 2px white, 0 0 0 3px #64b6ac
+        }
+
+    #msform .action-button-previous:hover,
+    #msform .action-button-previous:focus {
+        box-shadow: 0 0 0 2px white, 0 0 0 3px #508991
+    }
+
+.card {
+    z-index: 0;
+    border: none;
+    border-radius: 0.5rem;
+    position: relative
+}
+
+.fs-title {
+    font-size: 25px;
+    color: #2C3E50;
+    margin-bottom: 10px;
+    font-weight: bold;
+    text-align: left
+}
+
+.three-li {
+    margin-left: 70px;
+}
+
+.two-li {
+    margin-left: 130px;
+}
+
+#progressbar {
+    margin-bottom: 30px;
+    overflow: hidden;
+    color: lightgrey
+}
+
+    #progressbar .active {
+        color: #000000
+    }
+
+    #progressbar li {
+        list-style-type: none;
+        font-size: 12px;
+        width: 25%;
+        float: left;
+        position: relative
+    }
+
+    #progressbar #role::before,
+    #method:before,
+    #confirm::before {
+        font-family: "Font Awesome 5 Free";
+        font-weight: 900;
+        content: '\f1ae'
+    }
+
+    #progressbar li::before {
+        width: 50px;
+        height: 50px;
+        line-height: 45px;
+        display: block;
+        font-size: 18px;
+        color: #ffffff;
+        background: lightgray;
+        border-radius: 50%;
+        margin: 0 auto 10px auto;
+        padding: 2px;
+    }
+
+    #progressbar li::after {
+        content: '';
+        width: 100%;
+        height: 2px;
+        background: lightgray;
+        position: absolute;
+        left: 0;
+        top: 25px;
+        z-index: -1
+    }
+
+    #progressbar li.active::before,
+    #progressbar li.active::after {
+        background: #64b6ac;
+    }
+
+

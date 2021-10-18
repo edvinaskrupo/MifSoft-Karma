@@ -1,22 +1,56 @@
-﻿@using Microsoft.AspNetCore.Http
+﻿@model UserRegistrationModel
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Auth Page";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-
-<div class="text-center special-elite">
-    <h1 class="display-4">Welcome</h1>
-    @if (@Context.Session.GetString("User") == null) {
-        <div style="text-align:left; margin-left: 400px;">
-        <button class="btn" type="button" id="UserLoginBtn" onclick="openSite('/Auth/UserLogIn')">Login as user</button>
-        <span style="float:right; margin-right: 400px;">
-            <button class="btn" type="button" id="AdminLoginBtn" onclick="openSite('/Auth/AdminLogIn')">Login as admin</button>
-        </span>
+<div class="text-center">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-7 col-lg-6 text-center">
+                <div class="card pt-4">
+                    <h2><strong>Join our community</strong></h2>
+                    <p>Set your heart on doing good.</p>
+                    <div class="row">
+                        <div class="col-md-12"> 
+                            <form id="msform">
+                                <!-- progressbar -->
+                                <ul id="progressbar" class="two-li">
+                                    <li class="active" id="role"><strong>Role</strong></li>
+                                    <li id="confirm"><strong>Finish</strong></li>
+                                </ul> <!-- fieldsets -->
+                                <fieldset>
+                                    <div class="form-card">
+                                        <input type="button" class="role-button user-btn-border" value="Login as User"/>
+                                        <input type="button" class="role-button" value="Login as Admin"/>
+                                    </div>
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card hide" id="method-fs">
+                                        <input type="button" class="method-button user-btn-border" value="Log In" />
+                                        <input type="button" class="method-button" value="Sign Up" />
+                                    </div>
+                                    <input type="button" class="previous action-button-previous" value="Previous" />
+                                    <input type="button" class="next action-button" value="Next Step" />
+                                </fieldset>
+                                <fieldset>
+                                    <div class="form-card">
+                                        <h2 class="fs-title">Account Information</h2>
+                                        <input type="email" placeholder="Email Id" />
+                                        <input type="text" placeholder="UserName" />
+                                        <input type="password" placeholder="Password" />
+                                        <input type="password" placeholder="Confirm Password" />
+                                    </div> <input type="button" class="previous action-button-previous" value="Previous" /> 
+                                    <input type="button" class="next action-button" value="Confirm" />
+                                </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
-    else {
-        <p>You are already logged in.</p>
-    }
+    </div>
+
 </div>
