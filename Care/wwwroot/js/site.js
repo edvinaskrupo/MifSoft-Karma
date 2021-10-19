@@ -52,20 +52,27 @@ $(document).ready(function () {
 
     $(".previous").click(function () {
 
-        current_fs = $(this).parent();
-        previous_fs = $(this).parent().prev();
+        current_fs = $(this).parent().parent();
+        previous_fs = current_fs.prev();
 
         var current_li = $("#progressbar li").eq($("fieldset").index(current_fs));
         if (current_li.attr('id') == 'method') {
+            $(current_li).parent().removeClass("three-li");
+            $(current_li).parent().addClass("two-li");
             current_li.remove();
         }
         else {
             current_li.removeClass("active");
         }
+        $(current_fs).children().hide();
         changeStep(previous_fs);
     });
 
+
     $(".role-button").click(function (e) {
+        current_fs = $(this).parent().parent();
+        next_fs = current_fs.next();
+
         if ($(this).val() == "Login as User") {
 
             var ul = document.getElementById("progressbar");
@@ -73,18 +80,32 @@ $(document).ready(function () {
             ul.classList.remove('two-li');
             ul.classList.add('three-li');
 
-
-            current_fs = $(this).parent().parent();
-            next_fs = current_fs.next();
-
-            changeStep(next_fs);
+            changeStep(next_fs, 0, "#method-fs");
         }
         else {
-            
+            $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+            changeStep(next_fs, 1, "#admin-login-fs");
         }
     })
 
-    function changeStep(e) {
+    $(".method-button").click(function (e) {
+        current_fs = $(this).parent().parent().parent();
+        next_fs = current_fs.next();
+        $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
+
+        if ($(this).val() == "Log In") {
+            changeStep(next_fs, 0, "#user-login-fs");
+
+        }
+        else {
+            changeStep(next_fs, 1, "#user-register-fs");
+        }
+    })
+
+        
+    function changeStep(e, value, id) {
+        $(e).attr("value", value);
+        $(id).show();
         $(e).show();
 
         current_fs.animate({ opacity: 0 }, {
@@ -112,5 +133,4 @@ $(document).ready(function () {
         li.appendChild(strong);
         e.insertBefore(li, e.firstElementChild.nextSibling);
     }
-
 });

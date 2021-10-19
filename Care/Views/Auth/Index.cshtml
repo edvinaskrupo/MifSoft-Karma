@@ -14,38 +14,63 @@
                     <h2><strong>Join our community</strong></h2>
                     <p>Set your heart on doing good.</p>
                     <div class="row">
-                        <div class="col-md-12"> 
+                        <div class="col-md-12">
                             <form id="msform">
                                 <!-- progressbar -->
                                 <ul id="progressbar" class="two-li">
                                     <li class="active" id="role"><strong>Role</strong></li>
                                     <li id="confirm"><strong>Finish</strong></li>
                                 </ul> <!-- fieldsets -->
-                                <fieldset>
+                                <fieldset id="role-fs">
                                     <div class="form-card">
-                                        <input type="button" class="role-button user-btn-border" value="Login as User"/>
-                                        <input type="button" class="role-button" value="Login as Admin"/>
+                                        <input type="button" class="role-button user-btn-border" value="Login as User" />
+                                        <input type="button" class="role-button" value="Login as Admin" />
                                     </div>
                                 </fieldset>
                                 <fieldset>
-                                    <div class="form-card">
-                                        <input type="button" class="method-button user-btn-border" value="Log In" />
-                                        <input type="button" class="method-button" value="Sign Up" />
+                                    <div id="method-fs" style="display: none;">
+                                        <div class="form-card">
+                                            <input type="button" class="method-button user-btn-border" value="Log In" />
+                                            <input type="button" class="method-button" value="Sign Up" />
+                                        </div>
+                                        <input type="button" class="previous action-button-previous" value="Previous" />
                                     </div>
-                                    <input type="button" class="previous action-button-previous" value="Previous" />
+                                    <div id="admin-login-fs" style="display: none;">
+                                        <div class="form-card">
+                                            <h2 class="fs-title">Admin login</h2>
+                                            <input type="email" placeholder="Email Id" />
+                                            <input type="text" placeholder="UserName" />
+                                            <input type="password" placeholder="Password" />
+                                            <input type="password" placeholder="Confirm Password" />
+                                        </div>
+                                        <input type="button" class="previous action-button-previous" value="Previous" />
+                                        <input type="button" class="next action-button" value="Confirm" />
+                                    </div>
                                 </fieldset>
                                 <fieldset>
-                                    <div class="form-card">
-                                        <h2 class="fs-title">Account Information</h2>
-                                        <input type="email" placeholder="Email Id" />
-                                        <input type="text" placeholder="UserName" />
-                                        <input type="password" placeholder="Password" />
-                                        <input type="password" placeholder="Confirm Password" />
-                                    </div> <input type="button" class="previous action-button-previous" value="Previous" /> 
-                                    <input type="button" class="next action-button" value="Confirm" />
+                                    <div id="user-login-fs" style="display: none;">
+                                        <div class="form-card">
+                                            <h2 class="fs-title">User login</h2>
+                                            <input type="email" placeholder="Email Id" />
+                                            <input type="text" placeholder="UserName" />
+                                            <input type="password" placeholder="Password" />
+                                            <input type="password" placeholder="Confirm Password" />
+                                        </div> <input type="button" class="previous action-button-previous" value="Previous" />
+                                        <input type="button" class="next action-button" value="Confirm" />
+                                    </div>
+                                    <div id="user-register-fs" style="display: none;">
+                                        <div class="form-card">
+                                            <h2 class="fs-title">User registration</h2>
+                                            <input type="email" placeholder="Email Id" />
+                                            <input type="text" placeholder="UserName" />
+                                            <input type="password" placeholder="Password" />
+                                            <input type="password" placeholder="Confirm Password" />
+                                        </div> <input type="button" class="previous action-button-previous" value="Previous" />
+                                        <input type="button" class="next action-button" value="Confirm" />
+                                    </div>
                                 </fieldset>
                             </form>
-                        </div>
+                    </div>
                     </div>
                 </div>
             </div>

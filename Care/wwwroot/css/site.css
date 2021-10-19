@@ -231,7 +231,7 @@ body {
 }
 
 
-/* auth form style 
+/* auth-form style 
 -------------------------------------------------- */
 
 
@@ -248,7 +248,8 @@ input {
     width: 100%;
 }
 
-.role-button {
+.role-button,
+.method-button {
     width: 60%;
     height: 50px;
     background: none;
@@ -260,7 +261,8 @@ input {
     border: 1px solid black
 }
 
-.role-button:hover {
+.role-button:hover,
+.method-button:hover {
     border: 1px solid #64b6ac
 }
 
