@@ -48,7 +48,7 @@ namespace Care.Controllers
         }
 
         [HttpPost]
-        public async Task<ViewResult> SignUp(UserRegistrationModel userModel)
+        public async Task<IActionResult> SignUp(UserRegistrationModel userModel)
         {
             if (authenticator.Authenticate(userModel) && !UserEmailExists(userModel.EmailAddress))
             {
@@ -63,17 +63,17 @@ namespace Care.Controllers
                 _context.Add(newUser);
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("User", newUser.EmailAddress);
-                return View("~/Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Home");
             }
             else
             {
                 ModelState.AddModelError("Email", "Invalid email or password");
-                return View("~/Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Auth");
             }
         }
 
         [HttpPost]
-        public async Task<ViewResult> UserLogIn(UserRegistrationModel user)
+        public async Task<IActionResult> UserLogIn(UserRegistrationModel user)
         {
             var storedUser = await _context.Users.FirstOrDefaultAsync(m => m.EmailAddress == user.EmailAddress);
             if (storedUser != null)
@@ -81,7 +81,7 @@ namespace Care.Controllers
                 if (authenticator.AuthenticateLogin(user.Password, storedUser.PasswordHash, storedUser.PasswordSalt))
                 {
                         HttpContext.Session.SetString("User", storedUser.EmailAddress);
-                        return View("~/Views/Home/Index.cshtml", storedUser);
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("Password", "Invalid password!");
             }
@@ -89,7 +89,7 @@ namespace Care.Controllers
             {
                 ModelState.AddModelError("Name", "No such user!");
             }
-            return !ModelState.IsValid ? View("~/Views/Home/Index.cshtml") : View("~/Views/Home/Index.cshtml", storedUser);
+            return RedirectToAction("Index", "Auth");
         }
 
         [HttpPost]

@@ -43,6 +43,7 @@ $(document).ready(function () {
     var opacity;
 
     $(".next").click(function () {
+
         current_fs = $(this).parent();
         next_fs = $(this).parent().next();
 
@@ -52,7 +53,7 @@ $(document).ready(function () {
 
     $(".previous").click(function () {
 
-        current_fs = $(this).parent().parent();
+        current_fs = $(this).parent().parent().parent();
         previous_fs = current_fs.prev();
 
         var current_li = $("#progressbar li").eq($("fieldset").index(current_fs));
