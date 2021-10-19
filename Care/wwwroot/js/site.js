@@ -47,20 +47,7 @@ $(document).ready(function () {
         next_fs = $(this).parent().next();
 
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-        next_fs.show();
-
-        current_fs.animate({ opacity: 0 }, {
-            step: function (now) {
-               
-                opacity = 1 - now;
-                current_fs.css({
-                    'display': 'none',
-                    'position': 'relative'
-                });
-                next_fs.css({ 'opacity': opacity });
-            },
-            duration: 600
-        });
+        changeStep(next_fs);
     });
 
     $(".previous").click(function () {
@@ -68,21 +55,14 @@ $(document).ready(function () {
         current_fs = $(this).parent();
         previous_fs = $(this).parent().prev();
 
-        $("#progressbar li").eq($("fieldset").index(current_fs)).removeClass("active");
-        previous_fs.show();
-
-        current_fs.animate({ opacity: 0 }, {
-            step: function (now) {
-
-                opacity = 1 - now;
-                current_fs.css({
-                    'display': 'none',
-                    'position': 'relative'
-                });
-                previous_fs.css({ 'opacity': opacity });
-            },
-            duration: 600
-        });
+        var current_li = $("#progressbar li").eq($("fieldset").index(current_fs));
+        if (current_li.attr('id') == 'method') {
+            current_li.remove();
+        }
+        else {
+            current_li.removeClass("active");
+        }
+        changeStep(previous_fs);
     });
 
     $(".role-button").click(function (e) {
@@ -92,12 +72,34 @@ $(document).ready(function () {
             updateProgressBar(ul);
             ul.classList.remove('two-li');
             ul.classList.add('three-li');
-            
+
+
+            current_fs = $(this).parent().parent();
+            next_fs = current_fs.next();
+
+            changeStep(next_fs);
         }
         else {
-            console.log("adminas");
+            
         }
     })
+
+    function changeStep(e) {
+        $(e).show();
+
+        current_fs.animate({ opacity: 0 }, {
+            step: function (now) {
+
+                opacity = 1 - now;
+                current_fs.css({
+                    'display': 'none',
+                    'position': 'relative'
+                });
+                $(e).css({ 'opacity': opacity });
+            },
+            duration: 600
+        });
+    }
 
     function updateProgressBar(e) {
 
@@ -106,9 +108,9 @@ $(document).ready(function () {
         strong.appendChild(document.createTextNode("Method"))
 
         li.setAttribute("id", "method");
+        li.classList.add('active');
         li.appendChild(strong);
         e.insertBefore(li, e.firstElementChild.nextSibling);
     }
 
 });
-
