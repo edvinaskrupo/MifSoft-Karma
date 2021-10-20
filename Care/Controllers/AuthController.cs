@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Care.Models;
 using Care.Helpers;
 using Microsoft.AspNetCore.Http;
+using AngleSharp.Html.Dom;
 
 namespace Care.Controllers
 {
@@ -25,26 +26,6 @@ namespace Care.Controllers
         public IActionResult Index()
         {
             return View();
-        }
-
-        public IActionResult SignUp()
-        {
-            return PartialView("/Views/Shared/_Registration.cshtml");
-        }
-
-        public IActionResult LogIn()
-        {
-            return PartialView("/Views/Shared/_Login.cshtml");
-        }
-
-        public IActionResult AdminLogIn()
-        {
-            return PartialView("/Views/Shared/_LoginAdmin.cshtml");
-        }
-
-        public IActionResult UserLogIn()
-        {
-            return PartialView("/Views/Shared/_LoginUser.cshtml");
         }
 
         [HttpPost]
@@ -67,8 +48,10 @@ namespace Care.Controllers
             }
             else
             {
+                ViewBag.CurrentStage = "stage3";
+                ViewBag.CurrentId = "#user-register-fs";
                 ModelState.AddModelError("Email", "Invalid email or password");
-                return RedirectToAction("Index", "Auth");
+                return View("Index");
             }
         }
 
@@ -89,19 +72,23 @@ namespace Care.Controllers
             {
                 ModelState.AddModelError("Name", "No such user!");
             }
-            return RedirectToAction("Index", "Auth");
+            ViewBag.CurrentStage = "stage3";
+            ViewBag.CurrentId = "#user-login-fs";
+            return View("Index");
         }
 
         [HttpPost]
-        public ViewResult AdminLogIn(AdminModel admin)
+        public IActionResult LoginAdmin(AdminModel admin)
         {
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetString("User", "!admin");
-                return View("~/Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Post");
             }
             else {
+                ViewBag.CurrentStage = "stage2";
+                ViewBag.CurrentId = "#admin-login-fs";
                 ModelState.AddModelError("Password", "Invalid password!");
-                return View("~/Views/Home/Index.cshtml");
+                return View("Index");
             }
         }
 

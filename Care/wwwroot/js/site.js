@@ -42,6 +42,26 @@ $(document).ready(function () {
     var current_fs, next_fs, previous_fs; 
     var opacity;
 
+    let stage = $('input[name = "stage-field"][type="hidden"]').val();
+    let id = $('input[name = "id-field"][type="hidden"]').val();
+
+    if (stage == 'stage3') {
+        var ul = document.getElementById("progressbar");
+        updateProgressBar(ul);
+        ul.classList.remove('two-li');
+        ul.classList.add('three-li');
+    }
+    $("#progressbar li").eq($("fieldset").index(stage)).addClass("active");
+
+    if (stage.length > 0 && id.length > 0) {
+        $(id).show();
+        $('fieldset[stage = ' + stage + ']').show();
+    }
+    else {
+        $('fieldset[stage = "stage1"]').show();
+    }
+
+
     $(".next").click(function () {
 
         current_fs = $(this).parent();
@@ -55,6 +75,7 @@ $(document).ready(function () {
 
         current_fs = $(this).parent().parent().parent();
         previous_fs = current_fs.prev();
+        $(previous_fs).attr("value", null);
 
         var current_li = $("#progressbar li").eq($("fieldset").index(current_fs));
         if (current_li.attr('id') == 'method') {
@@ -66,6 +87,10 @@ $(document).ready(function () {
             current_li.removeClass("active");
         }
         $(current_fs).children().hide();
+
+        if ($(current_fs).attr('stage') == 'stage3') {
+            changeStep(previous_fs, "#method-fs");
+        }
         changeStep(previous_fs);
     });
 
@@ -81,11 +106,11 @@ $(document).ready(function () {
             ul.classList.remove('two-li');
             ul.classList.add('three-li');
 
-            changeStep(next_fs, 0, "#method-fs");
+            changeStep(next_fs, "#method-fs");
         }
         else {
             $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
-            changeStep(next_fs, 1, "#admin-login-fs");
+            changeStep(next_fs, "#admin-login-fs");
         }
     })
 
@@ -95,17 +120,17 @@ $(document).ready(function () {
         $("#progressbar li").eq($("fieldset").index(next_fs)).addClass("active");
 
         if ($(this).val() == "Log In") {
-            changeStep(next_fs, 0, "#user-login-fs");
+            changeStep(next_fs, "#user-login-fs");
 
         }
         else {
-            changeStep(next_fs, 1, "#user-register-fs");
+            changeStep(next_fs,"#user-register-fs");
         }
     })
 
         
-    function changeStep(e, value, id) {
-        $(e).attr("value", value);
+    function changeStep(e, id) {
+        $(e).attr('stage', 'current');
         $(id).show();
         $(e).show();
 
