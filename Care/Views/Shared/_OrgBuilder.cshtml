@@ -1,7 +1,7 @@
 ﻿@model NewPostModel
 <div id="postModal" class="modal fade" role="dialog">
     <div class="modal-dialog modal-lg">
-        <form asp-action="AddOrg" method="post">
+        <form asp-action="AddOrg" method="POST">
             <div class="modal-content">
                 <div class="modal-header">
                     <h4 class="modal-title">Add New Organization</h4>
@@ -11,36 +11,35 @@
                     <div class="row justify-content-md-center">
                         <div class="col-md-6">
                             <section>
-                                <div asp-validation-summary="All" class="text-danger"></div>
                                 <div class="form-group">
                                     <label asp-for="OrgName">Organization Name</label>
                                     <input asp-for="OrgName" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.OrgName)
+                                    @Html.ValidationMessageFor(m => m.OrgName, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgShortDescr">Quick Organization Description</label>
                                     <textarea class="form-control" asp-for="OrgShortDescr"></textarea>
-                                    @Html.ValidationMessageFor(m => m.OrgShortDescr)
+                                    @Html.ValidationMessageFor(m => m.OrgShortDescr, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgLongDescr">Longer Organization Description</label>
                                     <textarea class="form-control" asp-for="OrgLongDescr"></textarea>
-                                    @Html.ValidationMessageFor(m => m.OrgLongDescr)
+                                    @Html.ValidationMessageFor(m => m.OrgLongDescr, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgLink">Link to Organization's Website</label>
                                     <input asp-for="OrgLink" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.OrgLink)
+                                    @Html.ValidationMessageFor(m => m.OrgLink, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgLogo">Organization's Logo</label>
                                     <input class="form-control" asp-for="OrgLogo"/>
-                                    @Html.ValidationMessageFor(m => m.OrgLogo)
+                                    @Html.ValidationMessageFor(m => m.OrgLogo, "", new { @class = "text-danger" })
                                 </div>
                                 <div class="form-group">
                                     <label asp-for="OrgPhoto">Organization's Photo</label>
                                     <input class="form-control" asp-for="OrgPhoto">
-                                    @Html.ValidationMessageFor(m => m.OrgPhoto)
+                                    @Html.ValidationMessageFor(m => m.OrgPhoto, "", new { @class = "text-danger" })
                                 </div>
                             </section>
                         </div>
