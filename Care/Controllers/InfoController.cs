@@ -19,16 +19,16 @@ namespace Care.Controllers
                 UInt32 idInt = UInt32.Parse(id);
                 PostModel org = _context.Posts.FirstOrDefault(m => m.OrgId == idInt);
                 if (org == null) {
-                    ModelState.AddModelError("Info error", "Requested organisation doesn't exist");
-                    return View();
+                    ModelState.AddModelError("Info error", "The requested organisation doesn't exist.");
+                    return View(new PostModelWithErrorHandling ("The requested organisation doesn't exist."));
                 }
                 else {
-                    return View(org);
+                    return View(new PostModelWithErrorHandling(org));
                 }
             }
             catch {
-                ModelState.AddModelError("Info error", "Organisation ID must be an integer!");
-                return View();
+                ModelState.AddModelError("Info error", "Organisation ID must be an unsigned 32-bit integer.");
+                return View(new PostModelWithErrorHandling ("Organisation ID must be an unsigned 32-bit integer."));
             }
         }
     }

@@ -1,7 +1,7 @@
-﻿@model PostModel
+﻿@model PostModelWithErrorHandling
 
 @{
-    if (Model == null) {
+    if (Model == null || Model.errorStatus.errorEncountered == true) {
         ViewData["Title"] = "Error";
     }
     else {
@@ -12,7 +12,13 @@
 
 <div class="text-center special-elite">
     @if (Model == null) {
-        <p>An error occured. The requested organisation either doesn't exist or its ID is invalid.</p>
+        <p>Sorry, an unexpected error occured.</p>
+        <p>We apologise for your inconvenience.</p>
+        <p><a href="~/Home">Go back home</a></p>
+    }
+    else if (Model.errorStatus.errorEncountered == true) {
+        <p>Sorry, an error occured.</p>
+        <p>@Model.errorStatus.errorMessage</p>
         <p><a href="~/Home">Go back home</a></p>
     }
     else {

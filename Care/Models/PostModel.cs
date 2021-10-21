@@ -84,4 +84,36 @@ namespace Care.Models
             { }
     }
 
+    public class PostModelWithErrorHandling : PostModel {
+        public struct ErrorStatus {
+            public readonly bool errorEncountered;
+            public readonly string errorMessage;
+            public ErrorStatus (string errorMessage) {
+                this.errorEncountered = errorMessage != null;
+                this.errorMessage = errorMessage;
+            }
+        }
+
+        public readonly ErrorStatus errorStatus;
+
+        public PostModelWithErrorHandling (string errorMessage) {
+            if (errorMessage == null) {
+                this.errorStatus = new ErrorStatus ("No error message provided.");
+            }
+            else {
+                this.errorStatus = new ErrorStatus (errorMessage);
+            }
+        }
+        public PostModelWithErrorHandling (PostModel post) {
+                this.OrgId = post.OrgId;
+                this.OrgLink = post.OrgLink;
+                this.OrgLogo = post.OrgLogo;
+                this.OrgLongDescr = post.OrgLongDescr;
+                this.OrgName = post.OrgName;
+                this.OrgPhoto = post.OrgPhoto;
+                this.OrgShortDescr = post.OrgShortDescr;
+
+                this.errorStatus = new ErrorStatus (null);
+        }
     }
+}
