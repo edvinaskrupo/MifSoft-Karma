@@ -1,8 +1,10 @@
 ﻿using Care.Models;
+using Care.Helpers;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
@@ -23,8 +25,11 @@ namespace Care.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Posts<PostModel> postList = new Posts<PostModel>(db.Posts.ToArray());
-            return View(postList);
+            PostModel[] postList = new List<PostModel>(db.Posts).ToArray();
+            Array.Sort(postList);
+
+            Posts <PostModel> postList2 = new Posts<PostModel>(postList.ToArray());
+            return View(postList2);
         }
 
         public IActionResult Privacy()

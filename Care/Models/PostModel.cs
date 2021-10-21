@@ -5,10 +5,11 @@ using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Collections;
+using Care.Helpers;
 
 namespace Care.Models
 {
-    public class PostModel
+    public class PostModel : IEquatable<PostModel>, IComparable<PostModel>
     {
         [Required]
         [Key]
@@ -23,12 +24,24 @@ namespace Care.Models
         public string OrgLogo { get; set; }
         public string OrgPhoto { get; set; }
 
+
+        public override bool Equals(object obj) =>
+        (obj is PostModel post)
+                ? Equals(post)
+                : false;
+
+        public int SortByNameAscending(string name1, string name2) => name1?.CompareTo(name2) ?? 1;
+
+        public int CompareTo(PostModel comparePost) => comparePost == null ? 1 : OrgName.CompareTo(comparePost.OrgName);
+
+        public bool Equals(PostModel other) => other is null ? false : OrgName.Equals(other.OrgName);
+
     }
 
     public class Posts<T> : IEnumerable<T>
     {
         private readonly T[] array;
-
+        
         public Posts(T[] array)
         {
             if (array == null)
@@ -51,8 +64,8 @@ namespace Care.Models
         }
 
         public IEnumerator<T> GetEnumerator() => new PostsEnum<T>(array);
-
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
+
     }
         public class PostsEnum<T> : IEnumerator<T>
         {
