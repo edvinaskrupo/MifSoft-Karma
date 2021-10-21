@@ -1,0 +1,30 @@
+﻿@model PostModelWithErrorHandling
+
+@{
+    if (Model == null || Model.errorStatus.errorEncountered == true) {
+        ViewData["Title"] = "Error";
+    }
+    else {
+        ViewData["Title"] = Model.OrgName;
+    }
+}
+@using Microsoft.AspNetCore.Http
+
+<div class="text-center special-elite">
+    @if (Model == null) {
+        <p>Sorry, an unexpected error occured.</p>
+        <p>We apologise for your inconvenience.</p>
+        <p><a href="~/Home">Go back home</a></p>
+    }
+    else if (Model.errorStatus.errorEncountered == true) {
+        <p>Sorry, an error occured.</p>
+        <p>@Model.errorStatus.errorMessage</p>
+        <p><a href="~/Home">Go back home</a></p>
+    }
+    else {
+        <h2>@Model.OrgName</h2>
+        <h4>@Model.OrgLongDescr</h4>
+        <p><a href=@Model.OrgLink>Visit</a></p>
+        <p><a href="~/Home">More organisations</a></p>
+    }
+</div>
