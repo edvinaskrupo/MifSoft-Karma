@@ -87,7 +87,6 @@ namespace Care.Controllers
         public IActionResult LoginAdmin(AdminModel admin)
         {
             if (authenticator.AuthenticateAdmin(admin)) {
-                HttpContext.Session.SetString("User", "!admin");
                 HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.ADMIN);
                 return RedirectToAction("Index", "Post");
             }
