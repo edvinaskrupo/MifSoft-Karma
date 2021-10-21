@@ -63,6 +63,7 @@ namespace Care.Controllers
                 _context.Add(newUser);
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("User", newUser.EmailAddress);
+                HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.USER);
                 return View("~/Views/Home/Index.cshtml");
             }
             else

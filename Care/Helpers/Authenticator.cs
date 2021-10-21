@@ -64,5 +64,11 @@ namespace Care.Helpers
 
             return hasNumber.IsMatch(password) && hasUpperChar.IsMatch(password) && hasMinimum8Chars.IsMatch(password);
         }
+
+        public enum UserType {
+            NONE,
+            USER,
+            ADMIN
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿@using Microsoft.AspNetCore.Http
+@using Care.Helpers
 <!DOCTYPE html>
 <html lang="en" style="height:100%">
 <head>
@@ -30,7 +31,7 @@
                     </div>
                 </div>
 
-                @if (@Context.Session.GetString("User") != null)
+                @if (@Context.Session.GetInt32("UserType") == (int) Authenticator.UserType.NONE)
                 {
                     <div class="navbar-collapse collapse  justify-content-end special-elite">
                         <form asp-action="LogOut" asp-controller="Auth" method="get">
