@@ -50,7 +50,10 @@ namespace Care.Controllers
             {
                 ViewBag.CurrentStage = "stage3";
                 ViewBag.CurrentId = "#user-register-fs";
-                ModelState.AddModelError("Email", "Invalid email or password");
+                if (UserEmailExists(userModel.EmailAddress))
+                    ModelState.AddModelError("EmailAddress", "An account with this email already exists");
+                else
+                    ModelState.AddModelError("Password", "Invalid password");
                 return View("Index");
             }
         }
@@ -63,14 +66,14 @@ namespace Care.Controllers
             {
                 if (authenticator.AuthenticateLogin(user.Password, storedUser.PasswordHash, storedUser.PasswordSalt))
                 {
-                        HttpContext.Session.SetString("User", storedUser.EmailAddress);
+                    HttpContext.Session.SetString("User", storedUser.EmailAddress);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("Password", "Invalid password!");
             }
             else
             {
-                ModelState.AddModelError("Name", "No such user!");
+                ModelState.AddModelError("EmailAddress", "No such user!");
             }
             ViewBag.CurrentStage = "stage3";
             ViewBag.CurrentId = "#user-login-fs";
@@ -78,7 +81,7 @@ namespace Care.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginAdmin(AdminModel admin)
+        public IActionResult LoginAdmin(UserRegistrationModel admin)
         {
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetString("User", "!admin");

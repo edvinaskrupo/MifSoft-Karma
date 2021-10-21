@@ -230,6 +230,11 @@ body {
     font-family: 'Special Elite';
 }
 
+.info-label {
+    font-size: 14px;
+    font-style: italic;
+}
+
 
 /* auth-form style 
 -------------------------------------------------- */

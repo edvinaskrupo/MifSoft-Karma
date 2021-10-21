@@ -17,6 +17,7 @@
         <div class="form-group">
             <input type="password" asp-for="Password" placeholder="Password" />
             <span asp-validation-for="Password" class="text-danger"></span>
+            <label class="info-label">(Password must be 8 characters including one uppercase and number)</label>
             @Html.ValidationMessageFor(m => m.Password)
         </div>
     </div>
