@@ -1,4 +1,4 @@
-@model UserRegistrationModel
+@model AdminModel
 <div class="form-card">
     <h2 class="fs-title">Admin login</h2>
 </div>
@@ -6,8 +6,7 @@
     <div class="form-card">
         <div class="form-group">
             <input type="password" asp-for="Password" placeholder="Password" />
-            <span asp-validation-for="Password" class="text-danger"></span>
-            @Html.ValidationMessageFor(m => m.Password)
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
         </div>
     </div>
     <input type="button" class="previous action-button-previous" value="Previous" />

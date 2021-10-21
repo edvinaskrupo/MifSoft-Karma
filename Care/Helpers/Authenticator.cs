@@ -17,7 +17,7 @@ namespace Care.Helpers
             return authorized;
         }
 
-        public bool AuthenticateAdmin(UserRegistrationModel admin) {
+        public bool AuthenticateAdmin(AdminModel admin) {
             String hash, salt;
             try {
                 using (StreamReader authFile = new StreamReader("auth")) {

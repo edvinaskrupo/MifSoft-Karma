@@ -81,7 +81,7 @@ namespace Care.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginAdmin(UserRegistrationModel admin)
+        public IActionResult LoginAdmin(AdminModel admin)
         {
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetString("User", "!admin");
