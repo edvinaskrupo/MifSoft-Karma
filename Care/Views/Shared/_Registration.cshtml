@@ -1,44 +1,23 @@
 ﻿@model UserRegistrationModel
-<div id="registrationModal" class="modal fade" role="dialog">
-    <div class="modal-dialog">
-        <form asp-action="SignUp" method="post">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h4 class="modal-title">Sign Up</h4>
-                    <button type="button" class="close" data-dismiss="modal">&times;</button>
-                </div>
-                <div class="modal-body">
-                    <div class="row justify-content-md-center">
-                        <img src="/Images/user-login.png" />
-                    </div>
-                    <div class="row justify-content-md-center">
-                        <div class="col-md-6">
-                            <section>
-                                <div asp-validation-summary="All" class="text-danger"></div>
-                                <div class="form-group">
-                                    <label asp-for="FullName"></label>
-                                    <input asp-for="FullName" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.FullName)
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="EmailAddress"></label>
-                                    <input asp-for="EmailAddress" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.EmailAddress)
-                                </div>
-                                <div class="form-group">
-                                    <label asp-for="Password"></label>
-                                    <input asp-for="Password" type="password" class="form-control" />
-                                    @Html.ValidationMessageFor(m => m.Password)
-                                </div>
-                            </section>
-                        </div>
-                    </div>
-                </div>
-                <div class="modal-footer border-0">
-                    <button type="submit" class="btn btn-login m-auto"><span>Sign Up</span></button>
-                </div>
-            </div>
-            </form>
-    </div>
+<div class="form-card">
+    <h2 class="fs-title">User registration</h2>
 </div>
-
+<form asp-controller="Auth" asp-action="SignUp" method="POST">
+    <div class="form-card">
+        <div class="form-group">
+            <input type="text" asp-for="FullName" placeholder="Full name" />
+            @Html.ValidationMessageFor(m => m.FullName, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <input type="email" asp-for="EmailAddress" placeholder="Email address" />
+            @Html.ValidationMessageFor(m => m.EmailAddress, "", new { @class = "text-danger" })
+        </div>
+        <div class="form-group">
+            <input type="password" asp-for="Password" placeholder="Password" />
+            <label class="info-label">(Password must be 8 characters including one uppercase and number)</label>
+            @Html.ValidationMessageFor(m => m.Password, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <input type="button" class="previous action-button-previous" value="Previous" />
+    <button type="submit" class="action-button"><span>Confirm</span></button>
+</form>

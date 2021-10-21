@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Care.Models;
 using Care.Helpers;
 using Microsoft.AspNetCore.Http;
+//using AngleSharp.Html.Dom;
 
 namespace Care.Controllers
 {
@@ -27,28 +28,8 @@ namespace Care.Controllers
             return View();
         }
 
-        public IActionResult SignUp()
-        {
-            return PartialView("/Views/Shared/_Registration.cshtml");
-        }
-
-        public IActionResult LogIn()
-        {
-            return PartialView("/Views/Shared/_Login.cshtml");
-        }
-
-        public IActionResult AdminLogIn()
-        {
-            return PartialView("/Views/Shared/_LoginAdmin.cshtml");
-        }
-
-        public IActionResult UserLogIn()
-        {
-            return PartialView("/Views/Shared/_LoginUser.cshtml");
-        }
-
         [HttpPost]
-        public async Task<ViewResult> SignUp(UserRegistrationModel userModel)
+        public async Task<IActionResult> SignUp(UserRegistrationModel userModel)
         {
             if (authenticator.Authenticate(userModel) && !UserEmailExists(userModel.EmailAddress))
             {
@@ -64,45 +45,55 @@ namespace Care.Controllers
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("User", newUser.EmailAddress);
                 HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.USER);
-                return View("~/Views/Home/Index.cshtml");
+
+                return RedirectToAction("Index", "Home");
             }
             else
             {
-                ModelState.AddModelError("Email", "Invalid email or password");
-                return View("~/Views/Home/Index.cshtml");
+                ViewBag.CurrentStage = "stage3";
+                ViewBag.CurrentId = "#user-register-fs";
+                if (UserEmailExists(userModel.EmailAddress))
+                    ModelState.AddModelError("EmailAddress", "An account with this email already exists");
+                else
+                    ModelState.AddModelError("Password", "Invalid password");
+                return View("Index");
             }
         }
 
         [HttpPost]
-        public async Task<ViewResult> UserLogIn(UserRegistrationModel user)
+        public async Task<IActionResult> UserLogIn(UserRegistrationModel user)
         {
             var storedUser = await _context.Users.FirstOrDefaultAsync(m => m.EmailAddress == user.EmailAddress);
             if (storedUser != null)
             {
                 if (authenticator.AuthenticateLogin(user.Password, storedUser.PasswordHash, storedUser.PasswordSalt))
                 {
-                        HttpContext.Session.SetString("User", storedUser.EmailAddress);
-                        return View("~/Views/Home/Index.cshtml", storedUser);
+                    HttpContext.Session.SetString("User", storedUser.EmailAddress);
+                    return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("Password", "Invalid password!");
             }
             else
             {
-                ModelState.AddModelError("Name", "No such user!");
+                ModelState.AddModelError("EmailAddress", "No such user!");
             }
-            return !ModelState.IsValid ? View("~/Views/Home/Index.cshtml") : View("~/Views/Home/Index.cshtml", storedUser);
+            ViewBag.CurrentStage = "stage3";
+            ViewBag.CurrentId = "#user-login-fs";
+            return View("Index");
         }
 
         [HttpPost]
-        public ViewResult AdminLogIn(AdminModel admin)
+        public IActionResult LoginAdmin(AdminModel admin)
         {
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetString("User", "!admin");
-                return View("~/Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Post");
             }
             else {
+                ViewBag.CurrentStage = "stage2";
+                ViewBag.CurrentId = "#admin-login-fs";
                 ModelState.AddModelError("Password", "Invalid password!");
-                return View("~/Views/Home/Index.cshtml");
+                return View("Index");
             }
         }
 

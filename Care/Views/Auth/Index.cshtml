@@ -1,23 +1,67 @@
-﻿@using Microsoft.AspNetCore.Http
-@using Care.Helpers
+@using Microsoft.AspNetCore.Http
+@model UserRegistrationModel
 
 @{
     ViewData["Title"] = "Auth Page";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-
-<div class="text-center special-elite">
-    <h1 class="display-4">Welcome</h1>
-    @if (@Context.Session.GetInt32("UserType") != (int) Authenticator.UserType.NONE) {
-        <div style="text-align:left; margin-left: 400px;">
-        <button class="btn" type="button" id="UserLoginBtn" onclick="openSite('/Auth/UserLogIn')">Login as user</button>
-        <span style="float:right; margin-right: 400px;">
-            <button class="btn" type="button" id="AdminLoginBtn" onclick="openSite('/Auth/AdminLogIn')">Login as admin</button>
-        </span>
+<div class="text-center">
+    <div class="container-fluid">
+        <div class="row justify-content-center">
+            <div class="col-11 col-md-7 col-lg-6 text-center">
+                <div class="card pt-4">
+                    <h2><strong>Join our community</strong></h2>
+                    <p>Set your heart on doing good.</p>
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div id="msform">
+                                <input name="stage-field" type="hidden" value="@ViewBag.CurrentStage" />
+                                <input name="id-field" type="hidden" value="@ViewBag.CurrentId" />
+                                <!-- progressbar -->
+                                <ul id="progressbar" class="two-li">
+                                    <li class="active" id="role"><strong>Role</strong></li>
+                                    <li id="confirm"><strong>Finish</strong></li>
+                                </ul> <!-- fieldsets -->
+                                <fieldset id="role-fs" stage="stage1" style="display: none;">
+                                    <div class="form-card">
+                                        <input type="button" class="role-button user-btn-border" value="Login as User" />
+                                        <input type="button" class="role-button" value="Login as Admin" />
+                                    </div>
+                                </fieldset>
+                                <fieldset stage="stage2">
+                                    <div id="method-fs" style="display: none;">
+                                        <div class="form-card">
+                                            <input type="button" class="method-button user-btn-border" value="Log In" />
+                                            <input type="button" class="method-button" value="Sign Up" />
+                                        </div>
+                                        <div>
+                                            <input type="button" class="previous action-button-previous" value="Previous" />
+                                        </div>
+                                    </div>
+                                    <div id="admin-login-fs" style="display: none;">
+                                        @{
+                                            Html.RenderPartial("_LoginAdmin");
+                                        }
+                                    </div>
+                                </fieldset>
+                                <fieldset stage="stage3">
+                                    <div id="user-login-fs" style="display: none;">
+                                        @{
+                                            Html.RenderPartial("_LoginUser", Model);
+                                        }
+                                    </div>
+                                    <div id="user-register-fs" style="display: none;">
+                                        @{
+                                            Html.RenderPartial("_Registration", Model);
+                                        }
+                                    </div>
+                                </fieldset>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    }
-    else {
-        <p>You are already logged in.</p>
-    }
+    </div>
 </div>
