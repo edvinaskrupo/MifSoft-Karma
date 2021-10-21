@@ -25,23 +25,10 @@ namespace Care.Controllers
 
         public async Task<IActionResult> Index()
         {
- 
-            List<PostModel> postList = new List<PostModel>(db.Posts);
-
-            // 1, 0, or -1 is returned depending on whether one value is greater than, equal to, or less than the other. 
-             postList.Sort((PostModel x, PostModel y) => 
-             x.OrgName == null && y.OrgName == null
-                ? 0
-                : x.OrgName == null
-                    ? -1
-                    : y.OrgName == null
-                        ? 1
-                        : x.OrgName.CompareTo(y.OrgName));
-            //Array.Sort(postList, PostModel.SortByNameAscending());
-            
+            PostModel[] postList = new List<PostModel>(db.Posts).ToArray();
+            Array.Sort(postList);
 
             Posts <PostModel> postList2 = new Posts<PostModel>(postList.ToArray());
-
             return View(postList2);
         }
 
