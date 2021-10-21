@@ -23,7 +23,7 @@ namespace Care.Controllers
 
         public async Task<IActionResult> Index()
         {
-            Posts postList = new Posts(db.Posts.ToArray());
+            Posts<PostModel> postList = new Posts<PostModel>(db.Posts.ToArray());
             return View(postList);
         }
 

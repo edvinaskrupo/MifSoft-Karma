@@ -31,8 +31,7 @@ namespace Care.Helpers
         {
             
              var hashOfPassword = HashPassword(password, salt);
-             StringComparer comparer = StringComparer.OrdinalIgnoreCase;
-             return comparer.Compare(hashOfPassword, hash) == 0;
+             return hashOfPassword.CompareTo(hash) == 0;
         }
 
         public static string CreateSalt()
