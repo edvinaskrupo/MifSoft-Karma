@@ -31,7 +31,7 @@
                     </div>
                 </div>
 
-                @if (@Context.Session.GetInt32("UserType") == (int) Authenticator.UserType.NONE)
+                @if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) != Authenticator.UserType.NONE)
                 {
                     <div class="navbar-collapse collapse  justify-content-end special-elite">
                         <form asp-action="LogOut" asp-controller="Auth" method="get">

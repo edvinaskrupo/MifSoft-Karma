@@ -69,6 +69,7 @@ namespace Care.Controllers
                 if (authenticator.AuthenticateLogin(user.Password, storedUser.PasswordHash, storedUser.PasswordSalt))
                 {
                     HttpContext.Session.SetString("User", storedUser.EmailAddress);
+                    HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.USER);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("Password", "Invalid password!");
@@ -87,6 +88,7 @@ namespace Care.Controllers
         {
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetString("User", "!admin");
+                HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.ADMIN);
                 return RedirectToAction("Index", "Post");
             }
             else {
