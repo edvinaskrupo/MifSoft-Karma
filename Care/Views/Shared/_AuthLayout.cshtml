@@ -7,13 +7,14 @@
     <title>@ViewData["Title"] - Care</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" />
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.13.0/css/all.css">
 </head>
 <body class="auth-page">
     <header>
         <nav class="navbar center-block navbar-expand-sm navbar-toggleable-sm box-shadow mb-3">
             <div class="container special-elite">
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-md-center">
-                    <ul class="navbar-nav d-lg-flex align-items-center">
+                <div class="navbar-collapse collapse justify-content-md-center">
+                    <ul class="navbar-nav align-items-center">
                         <li class="nav-item h-100">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Home" asp-action="Index">Contribute</a>
                         </li>
@@ -31,8 +32,8 @@
 
             @if (@Context.Session.GetString("User") != null)
             {
-                <div class="navbar-collapse collapse  justify-content-end special-elite">
-                    <form asp-action="LogOut" method="get">
+                <div class="navbar-collapse collapse justify-content-md-end special-elite">
+                    <form asp-action="LogOut" method="get" asp-controller="Auth">
                         <ul class="navbar-nav">
                             <li class="nav-item">
                                 <button class="btn" type="submit" id="logOutBtn">Log Out</button>
