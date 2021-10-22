@@ -14,6 +14,8 @@ namespace Care.Models
         [Key]
         public int ImageId { get; set; }
 
+        public int UserId { get; set; }
+
         [Column(TypeName = "nvarchar(50)")]
         public string Name { get; set; }
 
