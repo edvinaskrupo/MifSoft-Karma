@@ -23,7 +23,7 @@ namespace Care.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
             PostModel[] postList = new List<PostModel>(db.Posts).ToArray();
             Array.Sort(postList);

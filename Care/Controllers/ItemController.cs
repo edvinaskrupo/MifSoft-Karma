@@ -63,8 +63,18 @@ namespace Care.Controllers
             {
                 //Save image to wwwroot/ItemImages
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
-                string extension = Path.GetExtension(itemModel.ImageFile.FileName);
+                string fileName;
+                string extension;
+                
+                try {
+                    fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
+                    extension = Path.GetExtension(itemModel.ImageFile.FileName);
+                }
+                catch (NullReferenceException) {
+                    ModelState.AddModelError("ImageFile", "You must select an image.");
+                    return View();
+                }
+
                 itemModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 Directory.CreateDirectory(wwwRootPath + "/ItemImages/");
                 string path = Path.Combine(wwwRootPath + "/ItemImages/", fileName);
