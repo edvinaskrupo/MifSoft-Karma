@@ -1,0 +1,38 @@
+﻿@using Microsoft.AspNetCore.Http
+@using Care.Helpers
+
+@model UserRegistrationModel
+
+@{
+    ViewData["Title"] = "Admin Panel";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+@if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
+{
+    <div class="text-center">
+        <div class="container-fluid">
+            <div class="row justify-content-center">
+                <div class="col-11 col-md-7 col-lg-6 text-center">
+                    <div class="card pt-4">
+                        <h2><strong>Admin Panel</strong></h2>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <div id="msform">
+                                    <div class="form-card">
+                                        <input type="button" class="role-button user-btn-border" value="Items" onclick="openSite('/Item/Index')"/>
+                                        <input type="button" class="role-button" value="Organizations" />
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+<p>You are not allowed to see this content.</p>
+}

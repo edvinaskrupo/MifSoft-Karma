@@ -1,0 +1,23 @@
+﻿@model NewPostModel
+<div class="form-card">
+    <h2 class="fs-title">Add New Organization</h2>
+</div>
+<form asp-controller="Post" asp-action="AddOrg" method="POST">
+    <div class="form-card">
+        <div class="form-group">
+            <input type="text" asp-for="OrgName" placeholder="Organiztion Name" />
+            @Html.ValidationMessageFor(m => m.OrgName, "", new { @class = "text-danger" })
+            <textarea asp-for="OrgShortDescr" placeholder="Quick Organization Description"></textarea>
+            @Html.ValidationMessageFor(m => m.OrgShortDescr, "", new { @class = "text-danger" })
+            <textarea asp-for="OrgLongDescr" placeholder="Longer Organization Description"></textarea>
+            @Html.ValidationMessageFor(m => m.OrgShortDescr, "", new { @class = "text-danger" })
+            <input type="url" asp-for="OrgLink" placeholder="Organization Link" />
+            @Html.ValidationMessageFor(m => m.OrgLink, "", new { @class = "text-danger" })
+            <input type="text" asp-for="OrgPhoto" placeholder="Organization Photo" />
+            @Html.ValidationMessageFor(m => m.OrgPhoto, "", new { @class = "text-danger" })
+            <input type="text" asp-for="OrgLogo" placeholder="Organization Logo" />
+            @Html.ValidationMessageFor(m => m.OrgLogo, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <button type="submit" class="action-button"><span>Add Organization</span></button>
+</form>

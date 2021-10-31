@@ -3,11 +3,12 @@
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-
 <div class="text-center special-elite">
     <h1 class="display-4">Admin Panel</h1>
     <div style="text-align:left; margin-left: 400px;">
-        <button class="btn" onclick="openSite('/Post/AddOrg')" id="postBtn">Organizations</button>
+        @{
+            Html.RenderPartial("~/Views/Shared/_PostBuilder.cshtml");
+        }
         <span style="float:right; margin-right: 400px;">
             <button class="btn" id="itemBtn" type="button">Items</button>
         </span>

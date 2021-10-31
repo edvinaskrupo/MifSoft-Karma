@@ -88,7 +88,7 @@ namespace Care.Controllers
         {
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.ADMIN);
-                return RedirectToAction("Index", "Post");
+                return RedirectToAction("Index", "Admin");
             }
             else {
                 ViewBag.CurrentStage = "stage2";
