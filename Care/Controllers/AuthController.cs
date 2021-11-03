@@ -45,6 +45,7 @@ namespace Care.Controllers
                 await _context.SaveChangesAsync();
                 HttpContext.Session.SetString("User", newUser.EmailAddress);
                 HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.USER);
+                HttpContext.Session.SetInt32("UserId", newUser.UserId);
 
                 return RedirectToAction("Index", "Home");
             }
@@ -70,6 +71,7 @@ namespace Care.Controllers
                 {
                     HttpContext.Session.SetString("User", storedUser.EmailAddress);
                     HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.USER);
+                    HttpContext.Session.SetInt32("UserId", storedUser.UserId);
                     return RedirectToAction("Index", "Home");
                 }
                 ModelState.AddModelError("Password", "Invalid password!");
