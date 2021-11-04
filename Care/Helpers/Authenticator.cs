@@ -71,12 +71,17 @@ namespace Care.Helpers
             ADMIN
         }
 
-        public static UserType GetUserType (Int32? UserType) {
-            if (UserType == null) {
+        public static UserType GetUserType (Int32? userTypeAsInt) {
+            if (userTypeAsInt == null) {
+                return Authenticator.UserType.NONE;
+            }
+            UserType userType = (UserType) userTypeAsInt;
+
+            if (userType != Authenticator.UserType.ADMIN && userType != Authenticator.UserType.USER) {
                 return Authenticator.UserType.NONE;
             }
             else {
-                return (UserType) UserType;
+                return userType;
             }
         }
     }
