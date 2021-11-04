@@ -8,6 +8,7 @@ using Microsoft.EntityFrameworkCore;
 using Care.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Http;
 
 namespace Care.Controllers
 {
@@ -83,6 +84,7 @@ namespace Care.Controllers
                     await itemModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //Insert record
+                itemModel.UserId = (int) HttpContext.Session.GetInt32("UserId");
                 _context.Add(itemModel);
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
