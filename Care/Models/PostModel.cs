@@ -6,6 +6,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Collections;
 using Care.Helpers;
+using Care.Controllers;
 
 namespace Care.Models
 {
@@ -97,36 +98,38 @@ namespace Care.Models
             { }
     }
 
-    public class PostModelWithErrorHandling : PostModel {
+    public class PostModelError {
         public struct ErrorStatus {
-            public readonly bool errorEncountered;
-            public readonly string errorMessage;
-            public ErrorStatus (string errorMessage) {
+            private bool errorEncountered {get; set;}
+            private string errorMessage {get; set;}
+            public void SetError (string errorMessage) {
                 this.errorEncountered = errorMessage != null;
                 this.errorMessage = errorMessage;
             }
-        }
 
-        public readonly ErrorStatus errorStatus;
-
-        public PostModelWithErrorHandling (string errorMessage) {
-            if (errorMessage == null) {
-                this.errorStatus = new ErrorStatus ("No error message provided.");
+            public bool ErrorExists () {
+                return this.errorEncountered;
             }
-            else {
-                this.errorStatus = new ErrorStatus (errorMessage);
+            public string GetErrorMessage () {
+                return this.errorMessage;
             }
         }
-        public PostModelWithErrorHandling (PostModel post) {
-                this.OrgId = post.OrgId;
-                this.OrgLink = post.OrgLink;
-                this.OrgLogo = post.OrgLogo;
-                this.OrgLongDescr = post.OrgLongDescr;
-                this.OrgName = post.OrgName;
-                this.OrgPhoto = post.OrgPhoto;
-                this.OrgShortDescr = post.OrgShortDescr;
 
-                this.errorStatus = new ErrorStatus (null);
+        public static ErrorStatus errorStatus;
+
+        public PostModelError(InfoController publisher) {
+            publisher.SetErrorEvent += delegate (object sender, EventArgsWithErrorMessage e) {
+                if (e.errorMessage == null) {
+                    errorStatus.SetError ("No error message provided.");
+                }
+                else {
+                    errorStatus.SetError (e.errorMessage);
+                }
+            };
+
+            publisher.ResetErrorEvent += delegate (object sender, EventArgs e) {
+                errorStatus.SetError (null);
+            };
         }
     }
 }

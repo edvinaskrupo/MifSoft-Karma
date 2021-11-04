@@ -1,7 +1,7 @@
-﻿@model PostModelWithErrorHandling
+﻿@model PostModel
 
 @{
-    if (Model == null || Model.errorStatus.errorEncountered == true) {
+    if (Model == null || PostModelError.errorStatus.ErrorExists() == true) {
         ViewData["Title"] = "Error";
     }
     else {
@@ -11,14 +11,14 @@
 @using Microsoft.AspNetCore.Http
 
 <div class="text-center special-elite">
-    @if (Model == null) {
-        <p>Sorry, an unexpected error occured.</p>
-        <p>We apologise for your inconvenience.</p>
+    @if (PostModelError.errorStatus.ErrorExists() == true) {
+        <p>Sorry, an error occured.</p>
+        <p>@PostModelError.errorStatus.GetErrorMessage()</p>
         <p><a href="~/Home">Go back home</a></p>
     }
-    else if (Model.errorStatus.errorEncountered == true) {
-        <p>Sorry, an error occured.</p>
-        <p>@Model.errorStatus.errorMessage</p>
+    else if (Model == null) {
+        <p>Sorry, an unexpected error occured.</p>
+        <p>We apologise for your inconvenience.</p>
         <p><a href="~/Home">Go back home</a></p>
     }
     else {
