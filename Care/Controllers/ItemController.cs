@@ -9,6 +9,7 @@ using Care.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
+using System.Dynamic;
 
 namespace Care.Controllers
 {
@@ -26,7 +27,10 @@ namespace Care.Controllers
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Items.ToListAsync());
+            var UsersAndItems = new UserAndItemModel();
+            UsersAndItems.Users = await _context.Users.ToListAsync();
+            UsersAndItems.Items = await _context.Items.ToListAsync();
+            return View(UsersAndItems);
         }
 
         // GET: Item/Details/5
