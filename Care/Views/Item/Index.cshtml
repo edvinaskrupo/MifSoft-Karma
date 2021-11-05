@@ -11,7 +11,6 @@
     <a asp-action="Upload">Create New</a>
 </p>
 
-<!-- Empty DB table could maybe result in a crash? -->
 <table class="table">
     <thead>
         <tr>
@@ -37,6 +36,7 @@
                 @Html.DisplayFor(modelItem => item.UserId)
             </td>
             <td>
+                <!-- No matching user results in a crash -->
                 @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress)
             </td>
             <td>
