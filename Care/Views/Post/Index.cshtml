@@ -5,12 +5,12 @@
 
 <div class="text-center special-elite">
     <h1 class="display-4">Admin Panel</h1>
-    <div style="text-align:left; margin-left: 400px;">
+    <div style="text-align: center">
         @{
             Html.RenderPartial("~/Views/Shared/_PostBuilder.cshtml");
         }
         <span style="float:right; margin-right: 400px;">
-            <button class="btn" id="itemBtn" type="button">Items</button>
+            <button class="btn" id="itemBtn" type="button" asp-action="ItemIndex">Items</button>
         </span>
     </div>
 </div>
