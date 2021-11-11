@@ -1,4 +1,4 @@
-﻿@model IEnumerable<Care.Models.ItemModel>
+﻿@model UserAndItemModel
 
 @{
     ViewData["Title"] = "Index";
@@ -8,23 +8,37 @@
 <h1>Index</h1>
 
 <p>
-    <a asp-action="Create">Create New</a>
+    <a asp-action="Upload">Create New</a>
 </p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Name)
+                @Html.DisplayNameFor(model => model.Users.ElementAt<UserModel>(0).UserId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.ImageName)
+                @Html.DisplayNameFor(model => model.Users.ElementAt<UserModel>(0).EmailAddress)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).ImageName)
             </th>
             <th></th>
         </tr>
     </thead>
     <tbody>
-@foreach (var item in Model) {
+@foreach (var item in Model.Items) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.UserId)
+            </td>
+            <td>
+                <!-- No matching user results in a crash -->
+                @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
