@@ -3,6 +3,7 @@ using System;
 using System.Linq;
 using Care.Models;
 using Care.Helpers;
+using System.Threading;
 
 namespace Care.Controllers
 {
@@ -19,16 +20,21 @@ namespace Care.Controllers
                 UInt32 idInt = UInt32.Parse(id);
                 PostModel org = _context.Posts.FirstOrDefault(m => m.OrgId == idInt);
                 if (org == null) {
-                    SetError("The requested organisation doesn't exist.");
+                    Thread errorReportThread = new Thread(SetError);
+                    errorReportThread.Start("The requested organisation doesn't exist.");
+                    
                     return View();
                 }
                 else {
-                    ResetError();
+                    Thread errorReportThread = new Thread(ResetError);
+                    errorReportThread.Start();
+
                     return View(org);
                 }
             }
             catch {
-                SetError("The requested organisation ID is invalid.");
+                Thread errorReportThread = new Thread(SetError);
+                errorReportThread.Start("The requested organisation ID is invalid.");
                 return View();
             }
         }
@@ -36,12 +42,17 @@ namespace Care.Controllers
         public event EventHandler<EventArgsWithErrorMessage> SetErrorEvent;
         public event EventHandler<EventArgs> ResetErrorEvent;
 
-        public virtual void SetError(string errorMessage) {
+        public virtual void SetError(object errorMessage) {
             new PostModelError(this);
             EventHandler<EventArgsWithErrorMessage> raiseEvent = SetErrorEvent;
 
             if (raiseEvent != null) {
-                raiseEvent (this, new EventArgsWithErrorMessage(errorMessage));
+                if (errorMessage is string) {
+                    raiseEvent (this, new EventArgsWithErrorMessage((string)errorMessage));
+                }
+                else {
+                    raiseEvent (this, new EventArgsWithErrorMessage(null));
+                }
             }
         }
 

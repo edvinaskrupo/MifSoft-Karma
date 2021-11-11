@@ -99,7 +99,7 @@ namespace Care.Models
     }
 
     public class PostModelError {
-        public struct ErrorStatus {
+        public class ErrorStatus {
             private bool errorEncountered {get; set;}
             private string errorMessage {get; set;}
             public void SetError (string errorMessage) {
@@ -115,21 +115,26 @@ namespace Care.Models
             }
         }
 
-        public static ErrorStatus errorStatus;
+        public static ErrorStatus errorStatus = new ErrorStatus();
 
         public PostModelError(InfoController publisher) {
             publisher.SetErrorEvent += delegate (object sender, EventArgsWithErrorMessage e) {
-                if (e.errorMessage == null) {
-                    errorStatus.SetError ("No error message provided.");
-                }
-                else {
-                    errorStatus.SetError (e.errorMessage);
+                lock (errorStatus) {
+                    if (e.errorMessage == null) {
+                        errorStatus.SetError ("No error message provided.");
+                    }
+                    else {
+                        errorStatus.SetError (e.errorMessage);
+                    }
                 }
             };
 
             publisher.ResetErrorEvent += delegate (object sender, EventArgs e) {
-                errorStatus.SetError (null);
+                lock (errorStatus) {
+                    errorStatus.SetError (null);
+                }
             };
+            
         }
     }
 }
