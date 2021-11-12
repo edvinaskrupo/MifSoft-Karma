@@ -24,6 +24,23 @@ namespace Care.Controllers
             this._hostEnvironment = hostEnvironment;
         }
 
+        // GET: Item/Market
+        public async Task<IActionResult> Market()
+        {
+            var UsersAndItems = new UserAndItemModel();
+            UsersAndItems.Users = await _context.Users.ToListAsync();
+            UsersAndItems.Items = await _context.Items.ToListAsync();
+            return View(UsersAndItems);
+        }
+
+        // GET: Item/Market
+        public async Task<IActionResult> Inventory()
+        {
+            var UsersAndItems = new UserAndItemModel();
+            UsersAndItems.Users = await _context.Users.ToListAsync();
+            UsersAndItems.Items = await _context.Items.ToListAsync();
+            return View(UsersAndItems);
+        }
         // GET: Item
         public async Task<IActionResult> Index()
         {

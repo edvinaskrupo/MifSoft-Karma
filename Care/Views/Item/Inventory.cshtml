@@ -1,0 +1,56 @@
+﻿@model UserAndItemModel
+@using Microsoft.AspNetCore.Http
+@using Care.Helpers 
+
+@{
+    ViewData["Title"] = "Inventory";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+@if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) != Authenticator.UserType.NONE)
+{
+    <h1>My Items</h1>
+
+    <p>
+        <a asp-action="Upload">Upload an Item</a>
+    </p>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).Name)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).ImageName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model.Items)
+            {
+                if (item.UserId == (int)Context.Session.GetInt32("UserId"))
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Name)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ImageName)
+                        </td>
+                        <td>
+                            <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
+                            <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
+                            <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+                        </td>
+                    </tr>
+                }
+
+            }
+        </tbody>
+    </table>
+} else
+    {
+        <h1>Please log in to use this feature.</h1>
+    }
