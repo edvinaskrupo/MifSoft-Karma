@@ -25,9 +25,9 @@ namespace Care.Controllers
 
         public IActionResult Index()
         {
-            //PostSorter sortPosts = SortPostsByName;
-            //Posts <PostModel> postList = sortPosts();
-            return View(null);
+            PostSorter sortPosts = SortPostsByName;
+            Posts <PostModel> postList = sortPosts();
+            return View(postList);
         }
 
         public IActionResult Privacy()

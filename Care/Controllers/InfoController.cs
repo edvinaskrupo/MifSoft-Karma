@@ -20,21 +20,18 @@ namespace Care.Controllers
                 UInt32 idInt = UInt32.Parse(id);
                 PostModel org = _context.Posts.FirstOrDefault(m => m.OrgId == idInt);
                 if (org == null) {
-                    Thread errorReportThread = new Thread(SetError);
-                    errorReportThread.Start("The requested organisation doesn't exist.");
+                    SetError("The requested organisation doesn't exist.");
                     
                     return View();
                 }
                 else {
-                    Thread errorReportThread = new Thread(ResetError);
-                    errorReportThread.Start();
+                    ResetError();
 
                     return View(org);
                 }
             }
             catch {
-                Thread errorReportThread = new Thread(SetError);
-                errorReportThread.Start("The requested organisation ID is invalid.");
+                SetError("The requested organisation ID is invalid.");
                 return View();
             }
         }
@@ -42,17 +39,12 @@ namespace Care.Controllers
         public event EventHandler<EventArgsWithErrorMessage> SetErrorEvent;
         public event EventHandler<EventArgs> ResetErrorEvent;
 
-        public virtual void SetError(object errorMessage) {
+        public virtual void SetError(string errorMessage) {
             new PostModelError(this);
             EventHandler<EventArgsWithErrorMessage> raiseEvent = SetErrorEvent;
 
             if (raiseEvent != null) {
-                if (errorMessage is string) {
-                    raiseEvent (this, new EventArgsWithErrorMessage((string)errorMessage));
-                }
-                else {
-                    raiseEvent (this, new EventArgsWithErrorMessage(null));
-                }
+                raiseEvent (this, new EventArgsWithErrorMessage(errorMessage));
             }
         }
 
