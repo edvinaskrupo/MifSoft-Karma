@@ -1,0 +1,42 @@
+﻿@model UserAndItemModel
+
+@{
+    ViewData["Title"] = "Market";
+    Layout = "~/Views/Shared/_AuthLayout.cshtml";
+}
+
+<h1>Item Market</h1>
+
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).Name)
+            </th>
+            <th>
+                Owner's Email Address
+            </th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model.Items)
+        {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                <!-- No matching user results in a crash -->
+                @try
+                {
+                    @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress);
+                }
+                catch (Exception e)
+                {
+                    <b>NULL</b>
+                }
+            </td>
+        </tr>
+        }
+    </tbody>
+</table>

@@ -37,7 +37,13 @@
             </td>
             <td>
                 <!-- No matching user results in a crash -->
-                @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress)
+                @try
+                {
+                     @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress);
+                } catch (Exception e)
+                {
+                     <b>NULL</b>
+                }
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Name)
