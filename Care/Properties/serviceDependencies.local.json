@@ -3,7 +3,7 @@
     "secrets1": {
       "type": "secrets.user"
     },
-    "mssql2": {
+    "mssql1": {
       "resourceId": "/subscriptions/[parameters('subscriptionId')]/resourceGroups/[parameters('resourceGroupName')]/providers/Microsoft.Sql/servers/caredbserver/databases/Care_db",
       "type": "mssql.azure",
       "connectionId": "ConnectionStrings:DefaultConnection",
