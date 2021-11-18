@@ -15,12 +15,12 @@ namespace Care.Controllers
     public class AuthController : Controller
     {
         private readonly ServiceDbContext _context;
-        private Authenticator authenticator;
+        private Lazy<Authenticator> lazyAuthenticator;
 
         public AuthController(ServiceDbContext context)
         {
             _context = context;
-            this.authenticator = new Authenticator();
+            this.lazyAuthenticator = new Lazy<Authenticator>();
         }
 
         public IActionResult Index()
@@ -31,6 +31,8 @@ namespace Care.Controllers
         [HttpPost]
         public async Task<IActionResult> SignUp(UserRegistrationModel userModel)
         {
+            Authenticator authenticator = lazyAuthenticator.Value;
+
             if (authenticator.Authenticate(userModel) && !UserEmailExists(userModel.EmailAddress))
             {
                 UserModel newUser = new UserModel();
@@ -62,8 +64,10 @@ namespace Care.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UserLogIn(UserRegistrationModel user)
+        public async Task<IActionResult> UserLogin(UserRegistrationModel user)
         {
+            Authenticator authenticator = lazyAuthenticator.Value;
+
             var storedUser = await _context.Users.FirstOrDefaultAsync(m => m.EmailAddress == user.EmailAddress);
             if (storedUser != null)
             {
@@ -86,8 +90,10 @@ namespace Care.Controllers
         }
 
         [HttpPost]
-        public IActionResult LoginAdmin(AdminModel admin)
+        public IActionResult AdminLogin(AdminModel admin)
         {
+            Authenticator authenticator = lazyAuthenticator.Value;
+            
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.ADMIN);
                 return RedirectToAction("Index", "Post");
@@ -103,7 +109,7 @@ namespace Care.Controllers
         [HttpGet]
         public ViewResult LogOut()
         {
-            HttpContext.Session.Clear();
+            HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.NONE);
             return View("~/Views/Auth/Index.cshtml");
         }
 
