@@ -29,6 +29,8 @@
   <ItemGroup>
     <Folder Include="wwwroot\Images\Carousel-images\" />
     <Folder Include="wwwroot\ItemImages\" />
+    <Folder Include="wwwroot\OrgImages\OrgLogos\" />
+    <Folder Include="wwwroot\OrgImages\OrgPhotos\" />
   </ItemGroup>
 
    

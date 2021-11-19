@@ -6,89 +6,66 @@ using System.Threading.Tasks;
 using Care.Controllers;
 using Care.Models;
 using System.Text.RegularExpressions;
+using Microsoft.AspNetCore.Hosting;
+using System.IO;
 
 namespace Care.Controllers
 {
     public class PostController : Controller
     {
         private readonly ServiceDbContext _context;
+        private readonly IWebHostEnvironment _hostEnvironment;
+        private string _dir;
 
-
-        public PostController(ServiceDbContext context)
+        public PostController(ServiceDbContext context, IWebHostEnvironment hostEnvironment)
         {
             _context = context;
+            this._hostEnvironment = hostEnvironment;
+            _dir = hostEnvironment.ContentRootPath;
         }
         public IActionResult Index()
         {
             return View();
         }
-        public IActionResult AddOrg()
-        {
-            return PartialView("/Views/Shared/_PostBuilder.cshtml");
-        }
         [HttpPost]
-        public async Task<IActionResult> AddOrg(NewPostModel newPostModel)
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> AddOrg(PostModel post)
         {
+
             bool loginFailed = false;
-
-            PostModel post = new PostModel();
-
-            post.OrgName = newPostModel.OrgName;
-
-            post.OrgShortDescr = newPostModel.OrgShortDescr;
-
-            post.OrgLongDescr = newPostModel.OrgLongDescr;
-
-            post.OrgLink = newPostModel.OrgLink;
-
-            post.OrgLogo = newPostModel.OrgLogo;
-
-            post.OrgPhoto = newPostModel.OrgPhoto;
-
-
-            if (post.OrgName == null)
+            if (post.OrgShortDescr != null)
             {
-                ModelState.AddModelError("OrgName", "Please enter the name of the organization.");
-                loginFailed = true;
+                if (post.OrgShortDescr.Length < 25 || post.OrgShortDescr.Length > 50)
+                {
+                    ModelState.AddModelError("OrgShortDescr", "Short organization description must be 25-50 symbols length.");
+                    loginFailed = true;
+                }
             }
-
-            if (post.OrgShortDescr == null)
+            
+            if (post.OrgLongDescr != null)
             {
-                ModelState.AddModelError("OrgShortDescr", "Please enter quick description of the organization.");
-                loginFailed = true;
+                if (post.OrgLongDescr.Length < 50)
+                {
+                    ModelState.AddModelError("OrgLongDescr", "The length of longer organization description should be at least 50 symbols.");
+                    loginFailed = true;
+                }
             }
-            else if (post.OrgShortDescr.Length < 50 || post.OrgShortDescr.Length > 100)
+            
+            if (ModelState.IsValid)
             {
-                ModelState.AddModelError("OrgShortDescr", "Short organization description must be 50-100 symbols length.");
-                loginFailed = true;
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(post.OrgLogoFile.FileName);
+                string extension = Path.GetExtension(post.OrgLogoFile.FileName);
+                post.OrgLogoName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                Directory.CreateDirectory(wwwRootPath + "/OrgImages/OrgLogos/");
+                string path = Path.Combine(wwwRootPath + "/OrgImages/OrgLogos/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await post.OrgLogoFile.CopyToAsync(fileStream);
+                }
             }
-
-            if (post.OrgLongDescr == null)
+            else
             {
-                ModelState.AddModelError("OrgLongDescr", "Please enter the name of the organization.");
-                loginFailed = true;
-            }
-            else if (post.OrgLongDescr.Length < 100)
-            {
-                ModelState.AddModelError("OrgLongDescr", "The length of longer organization description should be at least 100 symbols.");
-                loginFailed = true;
-            }
-
-            if (post.OrgLink == null)
-            {
-                ModelState.AddModelError("OrgLink", "Please enter the link of the organization website.");
-                loginFailed = true;
-            }
-
-            if (post.OrgLogo == null)
-            {
-                ModelState.AddModelError("OrgLogo", "Please enter the name of the organization.");
-                loginFailed = true;
-            }
-
-            if (post.OrgPhoto == null)
-            {
-                ModelState.AddModelError("OrgPhoto", "Please enter the name of the organization.");
                 loginFailed = true;
             }
 
@@ -96,9 +73,9 @@ namespace Care.Controllers
             {
                 _context.Add(post);
                 await _context.SaveChangesAsync();
-                return View("~/Views/Home/Index.cshtml");
+                return RedirectToAction("Index", "Admin");
             }
-            else return View("Index");
+            return View("Index");
         }
     }
 }

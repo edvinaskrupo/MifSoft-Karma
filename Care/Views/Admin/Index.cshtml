@@ -10,29 +10,19 @@
 
 @if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
 {
-    <div class="text-center">
-        <div class="container-fluid">
-            <div class="row justify-content-center">
-                <div class="col-11 col-md-7 col-lg-6 text-center">
-                    <div class="card pt-4">
-                        <h2><strong>Admin Panel</strong></h2>
-                        <div class="row">
-                            <div class="col-md-12">
-                                <div id="msform">
-                                    <div class="form-card">
-                                        <input type="button" class="role-button user-btn-border" value="Items" onclick="openSite('/Item/Index')"/>
-                                        <input type="button" class="role-button" value="Organizations" />
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+    <div class="text-center special-elite">
+        <div style="text-align: center">
+            <div class="form-card">
+                <h1 class="display-4">Admin Panel</h1>
+            </div>
+            <div class="form-card">
+                <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index">Item List</a>
+                <a class="nav-link text-dark" asp-area="" asp-controller="Post" asp-action="Index">Add Organization</a>
             </div>
         </div>
     </div>
 }
 else
 {
-<p>You are not allowed to see this content.</p>
+    <p>You are not allowed to see this content.</p>
 }
