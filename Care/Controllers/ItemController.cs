@@ -123,7 +123,7 @@ namespace Care.Controllers
 
             var itemModel = await _context.Items.FindAsync(id);
             if (itemModel == null)
-            {
+               {
                 return NotFound();
             }
             return View(itemModel);

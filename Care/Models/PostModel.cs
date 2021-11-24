@@ -6,6 +6,8 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Collections;
 using Care.Helpers;
+using Microsoft.AspNetCore.Http;
+using System.ComponentModel.DataAnnotations.Schema;
 using Care.Controllers;
 
 namespace Care.Models
@@ -15,15 +17,25 @@ namespace Care.Models
         [Required]
         [Key]
         public int OrgId { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Enter organization name.")]
         public string OrgName { get; set; }
         public string OrgShortDescr { get; set; }
-        [Required]
+        [Required(ErrorMessage = "Enter organization description.")]
         public string OrgLongDescr { get; set; }
         public string OrgLink { get; set; }
-        [Required]
-        public string OrgLogo { get; set; }
-        public string OrgPhoto { get; set; }
+
+        [DisplayName("Logo Name")]
+        public string OrgLogoName { get; set; }
+        [NotMapped]
+        [Required(ErrorMessage = "Upload organization logo.")]
+        [DisplayName("Logo File")]
+        public IFormFile OrgLogoFile { get; set; }
+
+        [DisplayName("Photo Name")]
+        public string OrgPhotoName { get; set; }
+        [NotMapped]
+        [DisplayName("Photo File")]
+        public IFormFile OrgPhotoFile { get; set; }
 
 
         public override bool Equals(object obj) =>

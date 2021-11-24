@@ -2,14 +2,37 @@
     ViewData["Title"] = "Home Page";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
-
-
+@model PostModel
 <div class="text-center special-elite">
-    <h1 class="display-4">Admin Panel</h1>
-    <div style="text-align:left; margin-left: 400px;">
-        <button class="btn" onclick="openSite('/Post/AddOrg')" id="postBtn">Organizations</button>
-        <span style="float:right; margin-right: 400px;">
-            <button class="btn" id="itemBtn" type="button">Items</button>
-        </span>
+    <div style="text-align: center">
+        <div class="form-card">
+            <h2 class="fs-title" style="text-align: center">Add New Organization</h2>
+        </div>
+        <form asp-controller="Post" asp-action="AddOrg" method="POST" enctype="multipart/form-data" style="display: inline">
+            <div class="form-card" style="text-align: center; width: 500px; margin: auto">
+                <div class="form-group">
+                    <input type="text" asp-for="OrgName" placeholder="Organiztion Name" />
+                    @Html.ValidationMessageFor(m => m.OrgName, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <textarea asp-for="OrgShortDescr" placeholder="Quick Organization Description" style="width: 500px;" rows="3"></textarea>
+                    @Html.ValidationMessageFor(m => m.OrgShortDescr, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <textarea asp-for="OrgLongDescr" placeholder="Longer Organization Description" style="width: 500px" rows="5"></textarea>
+                    @Html.ValidationMessageFor(m => m.OrgLongDescr, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group">
+                    <input type="url" asp-for="OrgLink" placeholder="Organization Link" />
+                    @Html.ValidationMessageFor(m => m.OrgLink, "", new { @class = "text-danger" })
+                </div>
+                <div class="form-group" style="text-align: center">
+                    <label asp-for="OrgLogoFile" class="control-label"></label>
+                    <input asp-for="OrgLogoFile" type="file" />
+                    @Html.ValidationMessageFor(m => m.OrgLogoFile, "", new { @class = "text-danger" })
+                </div>
+                <button type="submit" class="action-button"><span>Add Organization</span></button>
+            </div>
+        </form>
     </div>
 </div>
