@@ -1,4 +1,6 @@
 ﻿@model Care.Models.ItemModel
+@using Care.Helpers
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Details";
@@ -11,21 +13,29 @@
     <h4>ItemModel</h4>
     <hr />
     <dl class="row">
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.Name)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.Name)
         </dd>
-        <dt class = "col-sm-2">
+        <dt class="col-sm-2">
             @Html.DisplayNameFor(model => model.ImageName)
         </dt>
-        <dd class = "col-sm-10">
+        <dd class="col-sm-10">
             @Html.DisplayFor(model => model.ImageName)
         </dd>
     </dl>
 </div>
 <div>
-    <a asp-action="Edit" asp-route-id="@Model.ImageId">Edit</a> |
-    <a asp-action="Index">Back to List</a>
+    <a asp-action="Edit" asp-route-id="@Model.ImageId">Edit</a>
+    @if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
+    {
+        <a asp-action="Index">Back to List</a>
+    }
+    else
+    {
+        <a asp-action="Inventory">Back to Inventory</a>
+    }
+
 </div>

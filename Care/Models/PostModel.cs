@@ -6,8 +6,12 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Collections;
 using Care.Helpers;
+<<<<<<< HEAD
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;
+=======
+using Care.Controllers;
+>>>>>>> main
 
 namespace Care.Models
 {
@@ -109,26 +113,23 @@ namespace Care.Models
             { }
     }
 
-    public class PostModelWithErrorHandling : PostModel {
-        public struct ErrorStatus {
-            public readonly bool errorEncountered;
-            public readonly string errorMessage;
-            public ErrorStatus (string errorMessage) {
+    public class PostModelError {
+        public class ErrorStatus {
+            private bool errorEncountered {get; set;}
+            private string errorMessage {get; set;}
+            public void SetError (string errorMessage) {
                 this.errorEncountered = errorMessage != null;
                 this.errorMessage = errorMessage;
             }
-        }
 
-        public readonly ErrorStatus errorStatus;
-
-        public PostModelWithErrorHandling (string errorMessage) {
-            if (errorMessage == null) {
-                this.errorStatus = new ErrorStatus ("No error message provided.");
+            public bool ErrorExists () {
+                return this.errorEncountered;
             }
-            else {
-                this.errorStatus = new ErrorStatus (errorMessage);
+            public string GetErrorMessage () {
+                return this.errorMessage;
             }
         }
+<<<<<<< HEAD
         public PostModelWithErrorHandling (PostModel post) {
                 this.OrgId = post.OrgId;
                 this.OrgLink = post.OrgLink;
@@ -139,8 +140,29 @@ namespace Care.Models
                 this.OrgPhotoName = post.OrgPhotoName;
                 this.OrgPhotoFile = post.OrgPhotoFile;
                 this.OrgShortDescr = post.OrgShortDescr;
+=======
+>>>>>>> main
 
-                this.errorStatus = new ErrorStatus (null);
+        public static ErrorStatus errorStatus = new ErrorStatus();
+
+        public PostModelError(InfoController publisher) {
+            publisher.SetErrorEvent += delegate (object sender, EventArgsWithErrorMessage e) {
+                lock (errorStatus) {
+                    if (e.errorMessage == null) {
+                        errorStatus.SetError ("No error message provided.");
+                    }
+                    else {
+                        errorStatus.SetError (e.errorMessage);
+                    }
+                }
+            };
+
+            publisher.ResetErrorEvent += delegate (object sender, EventArgs e) {
+                lock (errorStatus) {
+                    errorStatus.SetError (null);
+                }
+            };
+            
         }
     }
 }

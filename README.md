@@ -12,3 +12,7 @@ This unified charity system application provides people a way to donate and rece
 **User Interaction** - when the user finds an item that could benefit them, they can check more pictures of the item and contact its owner via integrated Live Chat, then discuss the terms of the delivery.
 
 **Charity Support** - users can link their bank card in order to donate money to any of the available charities. Also, an automatic monthly donation to the chosen charity can be set up.
+
+## ER Diagram
+
+![Screenshot 2021-11-23 031830](https://user-images.githubusercontent.com/71435876/142958129-7c135dc6-8c56-42b2-967b-3984a0c52bfe.png)

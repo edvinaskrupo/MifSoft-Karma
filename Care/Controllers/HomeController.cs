@@ -23,13 +23,11 @@ namespace Care.Controllers
             this.db = db;
         }
 
-        public async Task<IActionResult> Index()
+        public IActionResult Index()
         {
-            PostModel[] postList = new List<PostModel>(db.Posts).ToArray();
-            Array.Sort(postList);
-
-            Posts <PostModel> postList2 = new Posts<PostModel>(postList.ToArray());
-            return View(postList2);
+            PostSorter sortPosts = SortPostsByName;
+            Posts <PostModel> postList = sortPosts();
+            return View(postList);
         }
 
         public IActionResult Privacy()
@@ -41,6 +39,14 @@ namespace Care.Controllers
         public IActionResult Error()
         {
             return View(new ErrorViewModel { RequestId = Activity.Current?.Id ?? HttpContext.TraceIdentifier });
+        }
+
+        private delegate Posts<PostModel> PostSorter();
+        private Posts<PostModel> SortPostsByName() {
+            PostModel[] postList = new List<PostModel>(db.Posts).ToArray();
+            Array.Sort(postList);
+
+            return new Posts<PostModel>(postList.ToArray());
         }
     }
 }

@@ -8,6 +8,8 @@ using Microsoft.EntityFrameworkCore;
 using Care.Models;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Microsoft.AspNetCore.Http;
+using System.Dynamic;
 
 namespace Care.Controllers
 {
@@ -22,10 +24,30 @@ namespace Care.Controllers
             this._hostEnvironment = hostEnvironment;
         }
 
+        // GET: Item/Market
+        public async Task<IActionResult> Market()
+        {
+            var UsersAndItems = new UserAndItemModel();
+            UsersAndItems.Users = await _context.Users.ToListAsync();
+            UsersAndItems.Items = await _context.Items.ToListAsync();
+            return View(UsersAndItems);
+        }
+
+        // GET: Item/Market
+        public async Task<IActionResult> Inventory()
+        {
+            var UsersAndItems = new UserAndItemModel();
+            UsersAndItems.Users = await _context.Users.ToListAsync();
+            UsersAndItems.Items = await _context.Items.ToListAsync();
+            return View(UsersAndItems);
+        }
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Items.ToListAsync());
+            var UsersAndItems = new UserAndItemModel();
+            UsersAndItems.Users = await _context.Users.ToListAsync();
+            UsersAndItems.Items = await _context.Items.ToListAsync();
+            return View(UsersAndItems);
         }
 
         // GET: Item/Details/5
@@ -63,8 +85,18 @@ namespace Care.Controllers
             {
                 //Save image to wwwroot/ItemImages
                 string wwwRootPath = _hostEnvironment.WebRootPath;
-                string fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
-                string extension = Path.GetExtension(itemModel.ImageFile.FileName);
+                string fileName;
+                string extension;
+                
+                try {
+                    fileName = Path.GetFileNameWithoutExtension(itemModel.ImageFile.FileName);
+                    extension = Path.GetExtension(itemModel.ImageFile.FileName);
+                }
+                catch (NullReferenceException) {
+                    ModelState.AddModelError("ImageFile", "You must select an image.");
+                    return View();
+                }
+
                 itemModel.ImageName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
                 Directory.CreateDirectory(wwwRootPath + "/ItemImages/");
                 string path = Path.Combine(wwwRootPath + "/ItemImages/", fileName);
@@ -73,9 +105,10 @@ namespace Care.Controllers
                     await itemModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //Insert record
+                itemModel.UserId = (int) HttpContext.Session.GetInt32("UserId");
                 _context.Add(itemModel);
                 await _context.SaveChangesAsync();
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Inventory));
             }
             return View(itemModel);
         }
@@ -101,7 +134,7 @@ namespace Care.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("ImageId,Name,ImageName")] ItemModel itemModel)
+        public async Task<IActionResult> Edit(int id, [Bind("UserId,ImageId,Name,ImageName")] ItemModel itemModel)
         {
             if (id != itemModel.ImageId)
             {
@@ -126,7 +159,7 @@ namespace Care.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Index));
+                return RedirectToAction(nameof(Inventory));
             }
             return View(itemModel);
         }
@@ -157,13 +190,14 @@ namespace Care.Controllers
             var itemModel = await _context.Items.FindAsync(id);
 
             //delete image from wwwroot/image
+            //crashes if the file does not exist
             var imagePath = Path.Combine(_hostEnvironment.WebRootPath, "ItemImages", itemModel.ImageName);
             if (System.IO.File.Exists(imagePath))
                 System.IO.File.Delete(imagePath);
             //delete the record
             _context.Items.Remove(itemModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Index));
+            return RedirectToAction(nameof(Inventory));
         }
 
         private bool ItemModelExists(int id)
