@@ -6,12 +6,9 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using System.Collections;
 using Care.Helpers;
-<<<<<<< HEAD
 using Microsoft.AspNetCore.Http;
 using System.ComponentModel.DataAnnotations.Schema;
-=======
 using Care.Controllers;
->>>>>>> main
 
 namespace Care.Models
 {
@@ -129,19 +126,6 @@ namespace Care.Models
                 return this.errorMessage;
             }
         }
-<<<<<<< HEAD
-        public PostModelWithErrorHandling (PostModel post) {
-                this.OrgId = post.OrgId;
-                this.OrgLink = post.OrgLink;
-                this.OrgLogoName = post.OrgLogoName;
-                this.OrgLogoFile = post.OrgLogoFile;
-                this.OrgLongDescr = post.OrgLongDescr;
-                this.OrgName = post.OrgName;
-                this.OrgPhotoName = post.OrgPhotoName;
-                this.OrgPhotoFile = post.OrgPhotoFile;
-                this.OrgShortDescr = post.OrgShortDescr;
-=======
->>>>>>> main
 
         public static ErrorStatus errorStatus = new ErrorStatus();
 
