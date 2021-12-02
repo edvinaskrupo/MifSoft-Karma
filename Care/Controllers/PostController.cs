@@ -69,6 +69,20 @@ namespace Care.Controllers
                 loginFailed = true;
             }
 
+            if (post.OrgPhotoFile != null)
+            {
+                string wwwRootPath = _hostEnvironment.WebRootPath;
+                string fileName = Path.GetFileNameWithoutExtension(post.OrgPhotoFile.FileName);
+                string extension = Path.GetExtension(post.OrgPhotoFile.FileName);
+                post.OrgPhotoName = fileName = fileName + DateTime.Now.ToString("yymmssfff") + extension;
+                Directory.CreateDirectory(wwwRootPath + "/OrgImages/OrgPhotos/");
+                string path = Path.Combine(wwwRootPath + "/OrgImages/OrgPhotos/", fileName);
+                using (var fileStream = new FileStream(path, FileMode.Create))
+                {
+                    await post.OrgPhotoFile.CopyToAsync(fileStream);
+                }
+            }
+            
             if (!loginFailed)
             {
                 _context.Add(post);

@@ -14,13 +14,7 @@ namespace Care.Controllers
         {
             return View();
         }
-
-
-
-        public IActionResult AddOrg()
-        {
-            return PartialView("/Views/Shared/_OrgBuilder.cshtml");
-        }
+        
         public IActionResult ItemIndex(UserRegistrationModel userModel)
         {
             return RedirectToAction("Index", "Item");
