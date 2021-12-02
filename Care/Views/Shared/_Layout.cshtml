@@ -24,13 +24,22 @@
                                     <img id="img_logo" alt="Logo" src="@Url.Content("/Images/logo.png")" />
                                 </a>
                             </li>
-                            <li class="nav-item h-100">
-                                <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Upload">Donate item</a>
-                            </li>
-                            @if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) != Authenticator.UserType.NONE)
+                            @if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) == Authenticator.UserType.USER)
                             {
                                 <li class="nav-item h-100">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Upload">Donate item</a>
+                                </li>
+                                <li class="nav-item h-100">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Inventory">Inventory</a>
+                                </li>
+                                <li class="nav-item h-100">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Market">Market</a>
+                                </li>
+                            }
+                            @if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
+                            {
+                                <li class="nav-item h-100">
+                                    <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Index">Item List</a>
                                 </li>
                                 <li class="nav-item h-100">
                                     <a class="nav-link text-dark" asp-area="" asp-controller="Item" asp-action="Market">Market</a>
