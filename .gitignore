@@ -364,6 +364,3 @@ FodyWeavers.xsd
 
 #Visual Studio Code debugging tasks
 Care/.vscode
-
-#ItemImages
-Care/wwwroot/ItemImages
