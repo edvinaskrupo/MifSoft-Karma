@@ -63,6 +63,7 @@ namespace Care.Controllers
                 {
                     await post.OrgLogoFile.CopyToAsync(fileStream);
                 }
+
             }
             else
             {

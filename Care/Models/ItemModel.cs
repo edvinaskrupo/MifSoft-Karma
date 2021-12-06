@@ -25,6 +25,12 @@ namespace Care.Models
         [DisplayName("Image Name")]
         public string ImageName { get; set; }
 
+        [Required]
+        public string Condition { get; set; }
+
+        [Required]
+        public string Category { get; set; }
+
         [NotMapped]
         [DisplayName("Upload File")]
         public IFormFile ImageFile { get; set; }
