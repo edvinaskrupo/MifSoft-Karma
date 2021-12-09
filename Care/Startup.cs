@@ -31,9 +31,17 @@ namespace Care
 
         public ILifetimeScope AutofacContainer { get; private set; }
 
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.Register(x => Log.Logger).SingleInstance();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
             services.AddControllersWithViews();
             services.AddDbContext<ServiceDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));

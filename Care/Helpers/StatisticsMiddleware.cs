@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
+using Serilog;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
@@ -8,10 +9,12 @@ namespace Care.Helpers
     public class StatisticsMiddleware
     {
         private readonly RequestDelegate _next;
+        private readonly ILogger _logger;
 
-        public StatisticsMiddleware(RequestDelegate next)
+        public StatisticsMiddleware(RequestDelegate next, ILogger logger)
         {
             _next = next;
+            _logger = logger;
         }
 
         public async Task InvokeAsync(HttpContext context)
@@ -26,14 +29,17 @@ namespace Care.Helpers
                 .GetMetadata<ControllerActionDescriptor>();
 
             var controllerName = controllerActionDescriptor.ControllerName;
-            var actionName = controllerActionDescriptor.ActionName;*/
+            var actionName = controllerActionDescriptor.ActionName;
 
             await _next(context);
 
             sw.Stop();
 
-            Debug.WriteLine($"It took {sw.ElapsedMilliseconds} ms to perform " +
-                $"this action {actionName} in this controller {controllerName}");
+            Debug.WriteLine($"It took {sw.ElapsedMilliseconds} ms to perform" +
+                $" {controllerName}/{actionName}");
+
+            _logger.Information($"It took {sw.ElapsedMilliseconds} ms to perform" +
+                $" {controllerName}/{actionName}");
         }
     }
 }
