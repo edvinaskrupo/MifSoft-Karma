@@ -9,16 +9,45 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace Care.Migrations
 {
     [DbContext(typeof(ServiceDbContext))]
-    [Migration("20211013232044_Posts")]
-    partial class Posts
+    [Migration("20211206195436_AddColumnsToItem")]
+    partial class AddColumnsToItem
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
-                .HasAnnotation("ProductVersion", "5.0.10")
+                .HasAnnotation("ProductVersion", "5.0.11")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+            modelBuilder.Entity("Care.Models.ItemModel", b =>
+                {
+                    b.Property<int>("ImageId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Category")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Condition")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("ImageName")
+                        .HasColumnType("nvarchar(100)");
+
+                    b.Property<string>("Name")
+                        .HasColumnType("nvarchar(50)");
+
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.HasKey("ImageId");
+
+                    b.ToTable("Items");
+                });
 
             modelBuilder.Entity("Care.Models.PostModel", b =>
                 {
@@ -30,8 +59,7 @@ namespace Care.Migrations
                     b.Property<string>("OrgLink")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrgLogo")
-                        .IsRequired()
+                    b.Property<string>("OrgLogoName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrgLongDescr")
@@ -42,7 +70,7 @@ namespace Care.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("OrgPhoto")
+                    b.Property<string>("OrgPhotoName")
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("OrgShortDescr")

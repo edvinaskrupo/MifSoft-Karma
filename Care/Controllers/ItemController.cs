@@ -10,6 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
+using Care.Helpers;
 
 namespace Care.Controllers
 {
@@ -153,7 +154,14 @@ namespace Care.Controllers
                         throw;
                     }
                 }
-                return RedirectToAction(nameof(Inventory));
+                if (Authenticator.GetUserType(HttpContext.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
+                {
+                    return RedirectToAction(nameof(Index));
+                } else
+                {
+                    return RedirectToAction(nameof(Inventory));
+                }
+                
             }
             return View(itemModel);
         }
@@ -191,7 +199,14 @@ namespace Care.Controllers
             //delete the record
             _context.Items.Remove(itemModel);
             await _context.SaveChangesAsync();
-            return RedirectToAction(nameof(Inventory));
+            if (Authenticator.GetUserType(HttpContext.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
+            {
+                return RedirectToAction(nameof(Index));
+            }
+            else
+            {
+                return RedirectToAction(nameof(Inventory));
+            }
         }
 
         private bool ItemModelExists(int id)

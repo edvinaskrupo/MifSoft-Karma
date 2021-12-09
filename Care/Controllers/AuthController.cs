@@ -96,6 +96,7 @@ namespace Care.Controllers
             
             if (authenticator.AuthenticateAdmin(admin)) {
                 HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.ADMIN);
+                HttpContext.Session.SetInt32("UserId", 0);
                 return RedirectToAction("Index", "Admin");
             }
             else {

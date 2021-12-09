@@ -1,55 +1,66 @@
-﻿@model List<UserAndItemModel>
+@model List<UserAndItemModel>
+
+@using Microsoft.AspNetCore.Http
+@using Care.Helpers
+
 
 @{
     ViewData["Title"] = "Index";
     Layout = "~/Views/Shared/_AuthLayout.cshtml";
 }
 
-<h1>Index</h1>
+@if (Authenticator.GetUserType(@Context.Session.GetInt32("UserType")) == Authenticator.UserType.ADMIN)
+{
+    <h1>Item List</h1>
 
-<p>
-    <a asp-action="Upload">Create New</a>
-</p>
+    <p>
+        <a asp-action="Upload">Create New</a>
+    </p>
 
-<table class="table">
-    <thead>
-        <tr>
-            <th>
-                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).UserId)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).EmailAddress)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemName)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ImageName)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.UserId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.EmailAddress)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ItemName)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.ImageName)
-            </td>
-            <td>
-                <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
-                <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
-                <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
-            </td>
-        </tr>
+    <table class="table">
+        <thead>
+            <tr>
+                <th>
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).UserId)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).EmailAddress)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemName)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ImageName)
+                </th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model) {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.UserId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ItemName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ImageName)
+                    </td>
+                    <td>
+                        <a asp-action="Edit" asp-route-id="@item.ImageId">Edit</a> |
+                        <a asp-action="Details" asp-route-id="@item.ImageId">Details</a> |
+                        <a asp-action="Delete" asp-route-id="@item.ImageId">Delete</a>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
 }
-    </tbody>
-</table>
+else
+{
+    <h1>You are not authorized to use this feature.</h1>
+} 
