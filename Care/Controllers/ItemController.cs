@@ -28,26 +28,20 @@ namespace Care.Controllers
         // GET: Item/Market
         public async Task<IActionResult> Market()
         {
-            var UsersAndItems = new UserAndItemModel();
-            UsersAndItems.Users = await _context.Users.ToListAsync();
-            UsersAndItems.Items = await _context.Items.ToListAsync();
+            List<UserAndItemModel> UsersAndItems = (await getItemInfo()).Where(item => item.UserId != HttpContext.Session.GetInt32("UserId")).ToList();
             return View(UsersAndItems);
         }
 
         // GET: Item/Market
         public async Task<IActionResult> Inventory()
         {
-            var UsersAndItems = new UserAndItemModel();
-            UsersAndItems.Users = await _context.Users.ToListAsync();
-            UsersAndItems.Items = await _context.Items.ToListAsync();
+            List<UserAndItemModel> UsersAndItems = (await getItemInfo()).Where(item => item.UserId == HttpContext.Session.GetInt32("UserId")).ToList();
             return View(UsersAndItems);
         }
         // GET: Item
         public async Task<IActionResult> Index()
         {
-            var UsersAndItems = new UserAndItemModel();
-            UsersAndItems.Users = await _context.Users.ToListAsync();
-            UsersAndItems.Items = await _context.Items.ToListAsync();
+            List<UserAndItemModel> UsersAndItems = await getItemInfo();
             return View(UsersAndItems);
         }
 
@@ -218,6 +212,30 @@ namespace Care.Controllers
         private bool ItemModelExists(int id)
         {
             return _context.Items.Any(e => e.ImageId == id);
+        }
+
+        public async Task<List<UserAndItemModel>> getItemInfo() {
+            var Users = await _context.Users.ToListAsync();
+            var Items = await _context.Items.ToListAsync();
+
+            var list = (from item in Items
+                        join user in Users on item.UserId equals user.UserId
+                        orderby item.UserId
+                        select new {
+                            UserId = item.UserId, 
+                            EmailAdress = user.EmailAddress, 
+                            ItemName = item.Name, 
+                            ImageName = item.ImageName,
+                            ImageId = item.ImageId
+                        }).AsEnumerable().Select(linq => new UserAndItemModel {
+                            UserId = linq.UserId,
+                            EmailAddress = linq.EmailAdress,
+                            ItemName = linq.ItemName,
+                            ImageName = linq.ImageName,
+                            ImageId = linq.ImageId
+                        }).ToList();
+            
+            return list;
         }
     }
 }

@@ -1,7 +1,8 @@
-﻿@using Microsoft.AspNetCore.Http
+@model List<UserAndItemModel>
+
+@using Microsoft.AspNetCore.Http
 @using Care.Helpers
 
-@model UserAndItemModel
 
 @{
     ViewData["Title"] = "Index";
@@ -12,44 +13,39 @@
 {
     <h1>Item List</h1>
 
+    <p>
+        <a asp-action="Upload">Create New</a>
+    </p>
+
     <table class="table">
         <thead>
             <tr>
                 <th>
-                    @Html.DisplayNameFor(model => model.Users.ElementAt<UserModel>(0).UserId)
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).UserId)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Users.ElementAt<UserModel>(0).EmailAddress)
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).EmailAddress)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).Name)
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemName)
                 </th>
                 <th>
-                    @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).ImageName)
+                    @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ImageName)
                 </th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var item in Model.Items)
-            {
+            @foreach (var item in Model) {
                 <tr>
                     <td>
                         @Html.DisplayFor(modelItem => item.UserId)
                     </td>
                     <td>
-                        <!-- No matching user results in a crash -->
-                        @try
-                        {
-                            @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress);
-                        }
-                        catch (Exception e)
-                        {
-                            <b>NULL</b>
-                        }
+                        @Html.DisplayFor(modelItem => item.EmailAddress)
                     </td>
                     <td>
-                        @Html.DisplayFor(modelItem => item.Name)
+                        @Html.DisplayFor(modelItem => item.ItemName)
                     </td>
                     <td>
                         @Html.DisplayFor(modelItem => item.ImageName)
