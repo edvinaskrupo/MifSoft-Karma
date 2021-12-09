@@ -1,4 +1,5 @@
-﻿@model UserAndItemModel
+﻿@model List<UserAndItemModel>
+@using Microsoft.AspNetCore.Http
 
 @{
     ViewData["Title"] = "Market";
@@ -7,11 +8,35 @@
 
 <h1>Item Market</h1>
 
+<p>
+    @{
+        var userWithMostItems = (from item in Model
+                                orderby item.UserId
+                                group item by item.UserId into itemGroup
+                                select new {
+                                    UserId = itemGroup.Key,
+                                    EmailAddress = itemGroup.Where(item => item.UserId == itemGroup.Key).ElementAt(0).EmailAddress,
+                                    Count = itemGroup.Count()
+                                }).Aggregate(
+                                    new {
+                                        UserId = 0, 
+                                        EmailAddress = "",
+                                        Count = 0
+                                    }, 
+                                    (current, next) => next.Count > current.Count ? next : current
+                                );
+    }
+
+    @(userWithMostItems.Count == 0 ?
+        "Sorry, no items were found" :
+        "User " + userWithMostItems.EmailAddress + " has uploaded the most (" + userWithMostItems.Count + ") items.")
+</p>
+
 <table class="table">
     <thead>
         <tr>
             <th>
-                @Html.DisplayNameFor(model => model.Items.ElementAt<ItemModel>(0).Name)
+                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemName)
             </th>
             <th>
                 Owner's Email Address
@@ -19,22 +44,14 @@
         </tr>
     </thead>
     <tbody>
-        @foreach (var item in Model.Items)
+        @foreach (var item in Model)
         {
         <tr>
             <td>
-                @Html.DisplayFor(modelItem => item.Name)
+                @Html.DisplayFor(modelItem => item.ItemName)
             </td>
             <td>
-                <!-- No matching user results in a crash -->
-                @try
-                {
-                    @Html.DisplayFor(modelItem => modelItem.Users.First(c => c.UserId == item.UserId).EmailAddress);
-                }
-                catch (Exception e)
-                {
-                    <b>NULL</b>
-                }
+                @Html.DisplayFor(modelItem => item.EmailAddress)
             </td>
         </tr>
         }

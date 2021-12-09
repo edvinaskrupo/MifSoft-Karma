@@ -110,6 +110,7 @@ namespace Care.Controllers
         public ViewResult LogOut()
         {
             HttpContext.Session.SetInt32("UserType", (int) Authenticator.UserType.NONE);
+            HttpContext.Session.SetInt32("UserId", -1);
             return View("~/Views/Auth/Index.cshtml");
         }
 
