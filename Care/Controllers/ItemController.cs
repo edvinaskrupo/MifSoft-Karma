@@ -225,13 +225,17 @@ namespace Care.Controllers
                         select new {
                             UserId = item.UserId, 
                             EmailAdress = user.EmailAddress, 
-                            ItemName = item.Name, 
+                            ItemName = item.Name,
+                            ItemCategory = item.Category,
+                            ItemCondition = item.Condition,
                             ImageName = item.ImageName,
                             ImageId = item.ImageId
                         }).AsEnumerable().Select(linq => new UserAndItemModel {
                             UserId = linq.UserId,
                             EmailAddress = linq.EmailAdress,
                             ItemName = linq.ItemName,
+                            ItemCategory = linq.ItemCategory,
+                            ItemCondition = linq.ItemCondition,
                             ImageName = linq.ImageName,
                             ImageId = linq.ImageId
                         }).ToList();

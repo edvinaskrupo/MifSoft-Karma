@@ -39,6 +39,12 @@
                 @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemName)
             </th>
             <th>
+                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemCategory)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.ElementAt<UserAndItemModel>(0).ItemCondition)
+            </th>
+            <th>
                 Owner's Email Address
             </th>
         </tr>
@@ -49,6 +55,12 @@
         <tr>
             <td>
                 @Html.DisplayFor(modelItem => item.ItemName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemCategory)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ItemCondition)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.EmailAddress)
