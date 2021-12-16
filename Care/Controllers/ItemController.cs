@@ -11,6 +11,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
 using Care.Helpers;
+using Autofac.Extras.DynamicProxy;
 
 namespace Care.Controllers
 {
@@ -32,7 +33,7 @@ namespace Care.Controllers
             return View(UsersAndItems);
         }
 
-        // GET: Item/Market
+        // GET: Item/Inventory
         public async Task<IActionResult> Inventory()
         {
             List<UserAndItemModel> UsersAndItems = (await getItemInfo()).Where(item => item.UserId == HttpContext.Session.GetInt32("UserId")).ToList();
@@ -74,7 +75,7 @@ namespace Care.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile")] ItemModel itemModel)
+        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile,Category,Condition")] ItemModel itemModel)
         {
             if (ModelState.IsValid)
             {
@@ -100,9 +101,17 @@ namespace Care.Controllers
                     await itemModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //Insert record
-                itemModel.UserId = (int) HttpContext.Session.GetInt32("UserId");
-                _context.Add(itemModel);
-                await _context.SaveChangesAsync();
+                try {
+                    itemModel.UserId = (int) HttpContext.Session.GetInt32("UserId");
+                    _context.Add(itemModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception e) {
+                    if (System.IO.File.Exists(path))
+                        System.IO.File.Delete(path);
+                    ModelState.AddModelError("ImageFile", $"An error occured. Sorry for any inconveniences.\n{e.InnerException.Message}");
+                    return View();
+                }
                 return RedirectToAction(nameof(Inventory));
             }
             return View(itemModel);
@@ -224,13 +233,17 @@ namespace Care.Controllers
                         select new {
                             UserId = item.UserId, 
                             EmailAdress = user.EmailAddress, 
-                            ItemName = item.Name, 
+                            ItemName = item.Name,
+                            ItemCategory = item.Category,
+                            ItemCondition = item.Condition,
                             ImageName = item.ImageName,
                             ImageId = item.ImageId
                         }).AsEnumerable().Select(linq => new UserAndItemModel {
                             UserId = linq.UserId,
                             EmailAddress = linq.EmailAdress,
                             ItemName = linq.ItemName,
+                            ItemCategory = linq.ItemCategory,
+                            ItemCondition = linq.ItemCondition,
                             ImageName = linq.ImageName,
                             ImageId = linq.ImageId
                         }).ToList();

@@ -1,3 +1,5 @@
+using Autofac;
+using Autofac.Extensions.DependencyInjection;
 using Care.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -13,6 +15,10 @@ using System.Collections.Generic;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
+using Care.Helpers;
+using Serilog;
+using Care.Controllers;
+using Autofac.Extras.DynamicProxy;
 
 namespace Care
 {
@@ -25,9 +31,24 @@ namespace Care
 
         public IConfiguration Configuration { get; }
 
+        public ILifetimeScope AutofacContainer { get; private set; }
+
+        public void ConfigureContainer(ContainerBuilder builder)
+        {
+            builder.Register(x => Log.Logger).SingleInstance();
+        }
+
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+            Log.Logger = new LoggerConfiguration()
+                .WriteTo.File("log-.txt", rollingInterval: RollingInterval.Day)
+                .CreateLogger();
+            services
+               .AddControllers()
+               // Enable controllers to be managed by Autofac.
+               .AddControllersAsServices()
+               ;
             services.AddControllersWithViews();
             services.AddDbContext<ServiceDbContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
@@ -55,6 +76,7 @@ namespace Care
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 app.UseHsts();
             }
+            this.AutofacContainer = app.ApplicationServices.GetAutofacRoot();
             app.UseHttpsRedirection();
             app.UseStaticFiles();
 
@@ -66,7 +88,10 @@ namespace Care
                 RequestPath = new PathString("/scripts")
             });
 
+
             app.UseRouting();
+
+            app.UseMiddleware<StatisticsMiddleware>();
 
             app.UseAuthorization();
 

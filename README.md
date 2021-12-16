@@ -15,4 +15,4 @@ This unified charity system application provides people a way to donate and rece
 
 ## ER Diagram
 
-![Screenshot 2021-11-23 031830](https://user-images.githubusercontent.com/71435876/142958129-7c135dc6-8c56-42b2-967b-3984a0c52bfe.png)
+![er_diagram](https://user-images.githubusercontent.com/71435876/146424634-efaec901-96a2-4dd4-82ef-24febeb82ac2.png)
