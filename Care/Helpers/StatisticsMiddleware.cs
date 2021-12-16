@@ -7,7 +7,6 @@ using System.Threading.Tasks;
 
 namespace Care.Helpers
 {
-    [LogCall]
     public class StatisticsMiddleware
     {
         private readonly RequestDelegate _next;
@@ -37,8 +36,8 @@ namespace Care.Helpers
 
             sw.Stop();
 
-            Debug.WriteLine($"It took {sw.ElapsedMilliseconds} ms to perform" +
-                $" {controllerName}/{actionName}");
+            //Debug.WriteLine($"It took {sw.ElapsedMilliseconds} ms to perform" +
+                //$" {controllerName}/{actionName}");
 
             _logger.Information($"It took {sw.ElapsedMilliseconds} ms to perform" +
                 $" {controllerName}/{actionName}");

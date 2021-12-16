@@ -12,6 +12,7 @@ using System.Threading.Tasks;
 
 namespace Care.Controllers
 {
+    [MethodLogger]
     public class HomeController : Controller
     {
         private readonly ILogger<HomeController> _logger;

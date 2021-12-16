@@ -5,9 +5,11 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
+using Care.Helpers;
 
 namespace Care.Controllers
 {
+    [MethodLogger]
     public class AdminController : Controller
     {
         public IActionResult Index()

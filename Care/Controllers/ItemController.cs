@@ -15,6 +15,7 @@ using Autofac.Extras.DynamicProxy;
 
 namespace Care.Controllers
 {
+    [MethodLogger]
     public class ItemController : Controller
     {
         private readonly IWebHostEnvironment _hostEnvironment;

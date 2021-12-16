@@ -8,9 +8,11 @@ using Care.Models;
 using System.Text.RegularExpressions;
 using Microsoft.AspNetCore.Hosting;
 using System.IO;
+using Care.Helpers;
 
 namespace Care.Controllers
 {
+    [MethodLogger]
     public class PostController : Controller
     {
         private readonly ServiceDbContext _context;

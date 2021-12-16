@@ -12,6 +12,7 @@ using Microsoft.AspNetCore.Http;
 
 namespace Care.Controllers
 {
+    [MethodLogger]
     public class AuthController : Controller
     {
         private readonly ServiceDbContext _context;
