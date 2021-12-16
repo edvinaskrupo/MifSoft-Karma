@@ -11,6 +11,7 @@ using System.IO;
 using Microsoft.AspNetCore.Http;
 using System.Dynamic;
 using Care.Helpers;
+using Autofac.Extras.DynamicProxy;
 
 namespace Care.Controllers
 {
@@ -32,7 +33,7 @@ namespace Care.Controllers
             return View(UsersAndItems);
         }
 
-        // GET: Item/Market
+        // GET: Item/Inventory
         public async Task<IActionResult> Inventory()
         {
             List<UserAndItemModel> UsersAndItems = (await getItemInfo()).Where(item => item.UserId == HttpContext.Session.GetInt32("UserId")).ToList();
