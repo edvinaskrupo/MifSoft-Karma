@@ -101,9 +101,17 @@ namespace Care.Controllers
                     await itemModel.ImageFile.CopyToAsync(fileStream);
                 }
                 //Insert record
-                itemModel.UserId = (int) HttpContext.Session.GetInt32("UserId");
-                _context.Add(itemModel);
-                await _context.SaveChangesAsync();
+                try {
+                    itemModel.UserId = (int) HttpContext.Session.GetInt32("UserId");
+                    _context.Add(itemModel);
+                    await _context.SaveChangesAsync();
+                }
+                catch (Exception e) {
+                    if (System.IO.File.Exists(path))
+                        System.IO.File.Delete(path);
+                    ModelState.AddModelError("ImageFile", $"An error occured. Sorry for any inconveniences.\n{e.InnerException.Message}");
+                    return View();
+                }
                 return RedirectToAction(nameof(Inventory));
             }
             return View(itemModel);
