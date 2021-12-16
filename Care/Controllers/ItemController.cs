@@ -75,7 +75,7 @@ namespace Care.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile")] ItemModel itemModel)
+        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile,Category,Condition")] ItemModel itemModel)
         {
             if (ModelState.IsValid)
             {
@@ -225,13 +225,17 @@ namespace Care.Controllers
                         select new {
                             UserId = item.UserId, 
                             EmailAdress = user.EmailAddress, 
-                            ItemName = item.Name, 
+                            ItemName = item.Name,
+                            ItemCategory = item.Category,
+                            ItemCondition = item.Condition,
                             ImageName = item.ImageName,
                             ImageId = item.ImageId
                         }).AsEnumerable().Select(linq => new UserAndItemModel {
                             UserId = linq.UserId,
                             EmailAddress = linq.EmailAdress,
                             ItemName = linq.ItemName,
+                            ItemCategory = linq.ItemCategory,
+                            ItemCondition = linq.ItemCondition,
                             ImageName = linq.ImageName,
                             ImageId = linq.ImageId
                         }).ToList();

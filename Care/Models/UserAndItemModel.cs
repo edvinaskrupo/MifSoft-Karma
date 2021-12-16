@@ -20,6 +20,12 @@ namespace Care.Models
         [DisplayName("Image Name")]
         public string ImageName { get; set; }
 
+        [DisplayName("Item Category")]
+        public string ItemCategory { get; set; }
+
+        [DisplayName("Item Condition")]
+        public string ItemCondition { get; set; }
+
         public int ImageId { get; set; }
     }
 }
