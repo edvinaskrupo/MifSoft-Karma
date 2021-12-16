@@ -7,6 +7,7 @@ namespace Tests {
         [InlineData("test")]
         [InlineData("")]
         [InlineData("haef46141][.;]'.'")]
+        [InlineData(null)]
         public void VerifyHashedPasswordTest(string value) {
             string salt = PasswordManager.CreateSalt();
             string hash = PasswordManager.HashPassword(value, salt);
