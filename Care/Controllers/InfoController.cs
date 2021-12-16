@@ -7,6 +7,7 @@ using System.Threading;
 
 namespace Care.Controllers
 {
+    [MethodLogger]
     public class InfoController : Controller
     {
         private readonly ServiceDbContext _context;
