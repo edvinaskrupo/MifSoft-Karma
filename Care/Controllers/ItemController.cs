@@ -74,7 +74,7 @@ namespace Care.Controllers
         // For more details, see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile")] ItemModel itemModel)
+        public async Task<IActionResult> Upload([Bind("ImageId,Name,ImageFile,Category,Condition")] ItemModel itemModel)
         {
             if (ModelState.IsValid)
             {

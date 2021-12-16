@@ -34,7 +34,6 @@ namespace Care
         public void ConfigureContainer(ContainerBuilder builder)
         {
             builder.Register(x => Log.Logger).SingleInstance();
-            builder.RegisterType<LogAspect>().SingleInstance();
         }
 
         // This method gets called by the runtime. Use this method to add services to the container.
