@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Autofac.Extras.DynamicProxy;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Serilog;
 using System.Diagnostics;
@@ -6,6 +7,7 @@ using System.Threading.Tasks;
 
 namespace Care.Helpers
 {
+    [LogCall]
     public class StatisticsMiddleware
     {
         private readonly RequestDelegate _next;
